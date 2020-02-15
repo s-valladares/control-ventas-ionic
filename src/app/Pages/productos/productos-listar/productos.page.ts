@@ -28,7 +28,7 @@ export class ProductosPage implements OnInit {
 
   getAllProductos() {
     this.service.getAll().then(res => {
-      this.mProductos = res;
+      this.mProductos = res.rows;
       console.log(this.mProductos);
     }).catch(err => {
       console.error(err);

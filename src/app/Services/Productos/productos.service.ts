@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 
 import { Config } from '../Config/config';
-import { IProductos } from './productos.interface';
+import { IProductos, IProductosRs } from './productos.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +20,7 @@ export class ProductosService {
   // Obtener listado de productos
   getAll() {
     return this.httpClient.get(this.mUrl + this.mService).pipe(
-      map((data: IProductos[]) => {
+      map((data: IProductosRs) => {
         return data;
       })).toPromise();
   }

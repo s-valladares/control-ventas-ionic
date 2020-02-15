@@ -1,3 +1,9 @@
+
+export interface IProductosRs {
+    size: number;
+    rows: IProductos[];
+}
+
 export interface IProductos {
     id: string;
     nombre: string;
