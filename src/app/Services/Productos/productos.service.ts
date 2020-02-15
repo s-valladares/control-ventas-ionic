@@ -17,12 +17,34 @@ export class ProductosService {
     private httpClient: HttpClient,
   ) { }
 
-  /***
-  * Obtener listado de productos
-  */
+  // Obtener listado de productos
   getAll() {
     return this.httpClient.get(this.mUrl + this.mService).pipe(
       map((data: IProductos[]) => {
+        return data;
+      })).toPromise();
+  }
+
+  // Obtener producto por id
+  getId(id: string) {
+    return this.httpClient.get(this.mUrl + this.mService + '/' + id).pipe(
+      map((data: IProductos) => {
+        return data;
+      })).toPromise();
+  }
+
+  // Actualizar producto
+  update(id: string, obj: IProductos) {
+    return this.httpClient.put(this.mUrl + this.mService + '/' + id, obj).pipe(
+      map((data: IProductos) => {
+        return data;
+      })).toPromise();
+  }
+
+  // Crear producto
+  create(obj: IProductos) {
+    return this.httpClient.post(this.mUrl + this.mService, obj).pipe(
+      map((data: IProductos) => {
         return data;
       })).toPromise();
   }
