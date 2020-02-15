@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductosService } from 'src/app/Services/services.index';
 import { IProductos } from 'src/app/Services/interfaces.index';
-import { Config } from '../../Services/Config/config';
+import { Config } from '../../../Services/Config/config';
 import { ToastController } from '@ionic/angular';
 
 @Component({

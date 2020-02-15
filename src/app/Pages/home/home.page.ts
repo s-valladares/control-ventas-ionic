@@ -26,7 +26,7 @@ export class HomePage {
   constructor(
     private router: Router,
   ) {
-    this.router.navigateByUrl('home/ventas');
+    this.router.navigateByUrl('home/pedidos');
 
   }
 

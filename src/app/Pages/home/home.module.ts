@@ -26,7 +26,7 @@ const routes: Routes = [
       },
       {
         path: 'productos',
-        loadChildren: () => import('../productos/productos.module').then(m => m.ProductosPageModule)
+        loadChildren: () => import('../Productos/productos-ver/productos.module').then(m => m.ProductosPageModule)
       },
       {
         path: 'principal',
