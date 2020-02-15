@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ProductosService } from 'src/app/Services/services.index';
 import { IProductos } from 'src/app/Services/interfaces.index';
 import { Config } from '../../../Services/Config/config';
-import { ToastController } from '@ionic/angular';
+import { ToastController, ModalController } from '@ionic/angular';
+import { ProductosComponent } from '../productos/productos.component';
 
 @Component({
   selector: 'app-productos',
@@ -15,7 +16,8 @@ export class ProductosPage implements OnInit {
 
   constructor(
     private service: ProductosService,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private modalController: ModalController
   ) {
     this.mProductos = [];
    }
@@ -41,6 +43,17 @@ export class ProductosPage implements OnInit {
       position: 'top'
     });
     toast.present();
+  }
+
+  async modalProductoCrear() {
+    const modal = await this.modalController.create({
+      component: ProductosComponent
+    });
+    return await modal.present();
+  }
+
+  crearProducto() {
+    this.modalProductoCrear();
   }
 
 

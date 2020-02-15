@@ -1,3 +1,44 @@
-<p>
-  productos works!
-</p>
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-button slot="end" fill="clear" color="light" (click)=cerarModal()>
+      <ion-icon name="close"></ion-icon>
+    </ion-button>
+    <ion-title>Agregar producto</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-list>
+
+    <ion-item>
+      <ion-label position="floating"><ion-text color="dark">Nombre</ion-text></ion-label>
+      <ion-input required type="text"></ion-input>
+    </ion-item>
+
+    
+    <ion-item>
+      <ion-label position="floating"><ion-text color="dark">Descripción</ion-text></ion-label>
+      <ion-input required type="text"></ion-input>
+    </ion-item>
+
+    
+    <ion-item>
+      <ion-label position="floating"><ion-text color="dark">Precio</ion-text></ion-label>
+      <ion-input required type="number"></ion-input>
+    </ion-item>
+
+    
+    <ion-item>
+      <ion-label position="floating"><ion-text color="dark">Tipo de producto</ion-text></ion-label>
+      <ion-select placeholder="Seleccionar tipo" okText="OK" cancelText="Cancelar">
+        <ion-select-option value="id">Bebida</ion-select-option>
+        <ion-select-option value="id">Refacción</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+  </ion-list>
+
+  <ion-button color="dark" expand="block" shape="round" >Guardar</ion-button>
+
+</ion-content>
