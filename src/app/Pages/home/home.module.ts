@@ -18,7 +18,7 @@ const routes: Routes = [
     children: [
       {
         path: 'pedidos',
-        loadChildren: () => import('../pedidos/pedidos.module').then(m => m.PedidosPageModule)
+        loadChildren: () => import('../Ventas/pedidos/pedidos.module').then(m => m.PedidosPageModule)
       },
       {
         path: 'egresos',
