@@ -13,7 +13,7 @@ const routes: Routes = [
   },
   {
     path: 'pedidos',
-    loadChildren: () => import('./Pages/pedidos/pedidos.module').then( m => m.PedidosPageModule)
+    loadChildren: () => import('./Pages/Ventas/pedidos-listar/pedidos.module').then( m => m.PedidosPageModule)
   }
 
 ];

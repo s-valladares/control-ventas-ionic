@@ -1,43 +1,51 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductosService } from 'src/app/Services/services.index';
-import { IProductos } from 'src/app/Services/interfaces.index';
+import { PedidosService } from 'src/app/Services/services.index';
+import { IPedidos } from 'src/app/Services/interfaces.index';
 import { ToastController, ModalController, AlertController } from '@ionic/angular';
-import { ProductosComponent } from '../productos-component/productos.component';
+import { PedidosComponent } from '../pedidos-component/pedidos.component';
 
 @Component({
-  selector: 'app-productos',
-  templateUrl: './productos.page.html',
-  styleUrls: ['./productos.page.scss'],
+  selector: 'app-pedidos',
+  templateUrl: './pedidos.page.html',
+  styleUrls: ['./pedidos.page.scss'],
 })
-export class ProductosPage implements OnInit {
+export class PedidosPage implements OnInit {
 
-  mProductos: IProductos[];
+  mPedidos: IPedidos[];
+  idPedido: string;
 
   constructor(
-    private service: ProductosService,
+    private service: PedidosService,
     private toastController: ToastController,
     private modalController: ModalController,
     private alertController: AlertController
   ) {
-    this.mProductos = [];
+    this.idPedido = '';
   }
 
   ngOnInit() {
     this.getAll();
-
   }
 
   getAll() {
     this.service.getAll().then(res => {
-      this.mProductos = res.rows;
+      this.mPedidos = res.rows;
     }).catch(err => {
-      console.error(err);
-      this.presentToast('Error al obtener productos');
+      console.log(err.error);
+      this.presentToast('Error al obtener pedidos');
     });
   }
 
-  delete(id: any) {
-    this.presentToast('Pendiente');
+
+  delete() {
+    this.service.delete(this.idPedido).then(res => {
+      console.log(res);
+      this.presentToast('Eliminado con éxito');
+      this.getAll();
+    }).catch(err => {
+      console.log(err);
+      this.presentToast('Error al eliminar pedido');
+    });
   }
 
   nuevo() {
@@ -49,6 +57,7 @@ export class ProductosPage implements OnInit {
   }
 
   async eliminar(id: any) {
+    this.idPedido = id;
     const alert = await this.alertController.create({
       header: '¿Eliminar?',
       message: '<strong>¿Está seguro de eliminar este producto?</strong>',
@@ -63,7 +72,7 @@ export class ProductosPage implements OnInit {
         }, {
           text: 'Sí, Seguro',
           handler: () => {
-            this.delete(id);
+            this.delete();
           }
         }
       ]
@@ -83,21 +92,20 @@ export class ProductosPage implements OnInit {
 
   async modalPresent(id: string) {
     const modal = await this.modalController.create({
-      component: ProductosComponent,
+      component: PedidosComponent,
       componentProps: {
-        idProducto: id
+        idPedido: id
       }
     });
 
     modal.onDidDismiss().then(data => {
       if (data.data) {
-        this.mProductos.push(data.data);
+        this.mPedidos.push(data.data);
       }
 
     }).catch(error => console.log(error));
 
     return await modal.present();
   }
-
 
 }

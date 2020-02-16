@@ -18,7 +18,7 @@ const routes: Routes = [
     children: [
       {
         path: 'pedidos',
-        loadChildren: () => import('../pedidos/pedidos.module').then(m => m.PedidosPageModule)
+        loadChildren: () => import('../Ventas/pedidos-listar/pedidos.module').then(m => m.PedidosPageModule)
       },
       {
         path: 'egresos',
@@ -34,7 +34,7 @@ const routes: Routes = [
       },
       {
         path: 'ventas',
-        loadChildren: () => import('../ventas/ventas.module').then( m => m.VentasPageModule)
+        loadChildren: () => import('../Reportes/ventas/ventas.module').then( m => m.VentasPageModule)
       }
     ]
   }

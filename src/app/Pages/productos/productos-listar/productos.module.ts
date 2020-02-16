@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { ProductosPageRoutingModule } from './productos-routing.module';
 
 import { ProductosPage } from './productos.page';
-import { ProductosComponent } from '../productos/productos.component';
+import { ProductosComponent } from '../productos-component/productos.component';
 
 @NgModule({
   imports: [
