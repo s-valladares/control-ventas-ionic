@@ -12,13 +12,16 @@ import { PedidosComponent } from '../pedidos-component/pedidos.component';
 export class PedidosPage implements OnInit {
 
   mPedidos: IPedidos[];
+  idPedido: string;
 
   constructor(
     private service: PedidosService,
     private toastController: ToastController,
     private modalController: ModalController,
     private alertController: AlertController
-  ) { }
+  ) {
+    this.idPedido = '';
+   }
 
   ngOnInit() {
     this.getAll();
@@ -34,8 +37,15 @@ export class PedidosPage implements OnInit {
   }
 
 
-  delete(id: any) {
-    this.presentToast('Pendiente');
+  delete() {
+    this.service.delete(this.idPedido).then(res => {
+      console.log(res);
+      this.presentToast('Eliminado con éxito');
+      this.getAll();
+    }).catch(err => {
+      console.log(err);
+      this.presentToast('Error al eliminar pedido');
+    });
   }
 
   nuevo() {
@@ -47,6 +57,7 @@ export class PedidosPage implements OnInit {
   }
 
   async eliminar(id: any) {
+    this.idPedido = id;
     const alert = await this.alertController.create({
       header: '¿Eliminar?',
       message: '<strong>¿Está seguro de eliminar este producto?</strong>',
@@ -61,7 +72,7 @@ export class PedidosPage implements OnInit {
         }, {
           text: 'Sí, Seguro',
           handler: () => {
-            this.delete(id);
+            this.delete();
           }
         }
       ]
