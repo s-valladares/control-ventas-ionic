@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ModalController, ToastController } from '@ionic/angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IProductos, Productos, IProductosTipos, ProductosTipos } from 'src/app/Services/interfaces.index';
@@ -10,6 +10,8 @@ import { ProductosService } from 'src/app/Services/services.index';
   styleUrls: ['./productos.component.scss'],
 })
 export class ProductosComponent implements OnInit {
+
+  @Input() idProducto: string;
 
   form: FormGroup;
   mProducto: IProductos;
@@ -26,12 +28,18 @@ export class ProductosComponent implements OnInit {
 
   ngOnInit() {
     this.getAllProductosTipos();
+
+    if (this.idProducto !== '') {
+      
+    }
+
     this.form = this.formBuilder.group({
       nombre: ['', [Validators.required]],
       descripcion: [''],
       precio: [0, [Validators.required]],
       tipo: [null, [Validators.required]],
     });
+
   }
 
   cerarModal(ob: IProductos) {

@@ -10,10 +10,18 @@
 <ion-content>
 
   <ion-list>
+
     <ion-item-sliding *ngFor="let item of mProductos">
 
       <ion-item (click)="verInfo(item.id)">
-        <ion-label>{{item.nombre}}</ion-label>
+        <ion-avatar slot="start">
+          <img *ngIf="item.tipo.nombre === 'Bebidas'" src="../../../../assets/imgs/frappeC.svg">
+          <img *ngIf="item.tipo.nombre === 'Refacciones'" src="../../../../assets/imgs/nachos.svg">
+        </ion-avatar>
+        <ion-label>
+          <h2><strong>{{item.nombre}} - Q{{item.precio | number:'1.2-2'}}</strong></h2>
+          <h3>{{item.descripcion}}</h3>
+        </ion-label>
       </ion-item>
 
       <ion-item-options side="end">
@@ -21,8 +29,6 @@
           <ion-icon name="trash"></ion-icon>
         </ion-item-option>
       </ion-item-options>
-
-
 
     </ion-item-sliding>
 

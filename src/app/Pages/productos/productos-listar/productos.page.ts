@@ -40,8 +40,12 @@ export class ProductosPage implements OnInit {
     this.presentToast('Pendiente');
   }
 
+  nuevo() {
+    this.modalPresent('');
+  }
+
   verInfo(id) {
-    console.log(id);
+    this.modalPresent(id);
   }
 
   async eliminar(id: any) {
@@ -68,9 +72,6 @@ export class ProductosPage implements OnInit {
     await alert.present();
   }
 
-
-
-
   async presentToast(msg) {
     const toast = await this.toastController.create({
       message: msg,
@@ -80,9 +81,12 @@ export class ProductosPage implements OnInit {
     toast.present();
   }
 
-  async modalPresent() {
+  async modalPresent(id: string) {
     const modal = await this.modalController.create({
-      component: ProductosComponent
+      component: ProductosComponent,
+      componentProps: {
+        idProducto: id
+      }
     });
 
     modal.onDidDismiss().then(data => {
@@ -95,9 +99,5 @@ export class ProductosPage implements OnInit {
     return await modal.present();
   }
 
-  nuevo() {
-    this.modalPresent();
-  }
-
-
+  
 }
