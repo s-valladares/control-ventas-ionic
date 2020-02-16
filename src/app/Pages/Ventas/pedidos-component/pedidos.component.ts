@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ModalController, ToastController } from '@ionic/angular';
-import { IPedidos } from 'src/app/Services/interfaces.index';
+import { IPedidos, Pedidos } from 'src/app/Services/interfaces.index';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { PedidosService } from 'src/app/Services/services.index';
 
@@ -25,10 +25,15 @@ export class PedidosComponent implements OnInit {
     private toastController: ToastController
   ) {
     this.fechaHoy = new Date();
+    this.mPedido = Pedidos.empty();
   }
 
   ngOnInit() {
-    console.log(this.fechaHoy);
+
+    if (this.idPedido !== '') {
+      this.getAllProductosId();
+    }
+
     this.form = this.formBuilder.group({
       cliente: ['', [Validators.required]],
       nota: [''],
@@ -36,6 +41,15 @@ export class PedidosComponent implements OnInit {
       hora: ['', [Validators.required]]
     });
 
+  }
+
+  getAllProductosId() {
+    this.service.getId(this.idPedido).then(res => {
+      this.mPedido = res;
+    }).catch(err => {
+      console.error(err);
+      this.presentToast('Error al obtener pedido');
+    });
   }
 
   guardar() {

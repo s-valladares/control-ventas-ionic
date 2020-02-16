@@ -10,8 +10,6 @@
 
 <ion-content>
 
-
-
   <div *ngIf="idPedido === ''">
     <form [formGroup]="form" (ngSubmit)="guardar()">
 
@@ -37,14 +35,16 @@
           <ion-label position="floating">
             <ion-text color="dark">Fecha de entrega</ion-text>
           </ion-label>
-          <ion-datetime cancel-text="Cancelar" done-text="Ok" value="" [placeholder]="fechaHoy | date" display-timezone="utc" formControlName="entrega"></ion-datetime>
+          <ion-datetime cancel-text="Cancelar" done-text="Ok" value="" [placeholder]="fechaHoy | date"
+            display-timezone="utc" formControlName="entrega"></ion-datetime>
         </ion-item>
 
         <ion-item>
           <ion-label position="floating">
             <ion-text color="dark">Hora de entrega</ion-text>
           </ion-label>
-          <ion-datetime cancel-text="Cancelar" done-text="Ok" value="" [placeholder]="fechaHoy | date: 'shortTime'" display-format="h:mm A" picker-format="h:mm A" formControlName="hora"></ion-datetime>
+          <ion-datetime cancel-text="Cancelar" done-text="Ok" value="" [placeholder]="fechaHoy | date: 'shortTime'"
+            display-format="h:mm A" picker-format="h:mm A" formControlName="hora"></ion-datetime>
         </ion-item>
 
         <div style="margin: 20px;">
@@ -57,5 +57,57 @@
     </form>
   </div>
 
+  <div *ngIf="idPedido !== ''">
+    <div class="ion-padding">
+      <ion-text>
+        <ion-label>Cliente: <b>{{mPedido.cliente}}</b></ion-label><br>
+        <ion-label>Entregar: <b>{{mPedido.hora  | date: 'shortTime'}} - {{mPedido.entrega  | date: 'MMM d'}}</b>
+        </ion-label><br>
+        <ion-label>Total a pagar: <b>Q{{totalVenta | number:'1.2-2'}}</b></ion-label>
+      </ion-text>
+    </div>
+  </div>
+
+
+  <ion-list>
+
+    <ion-item-sliding>
+
+      <ion-item (click)="verInfo(item.id)">
+        <ion-label>
+          <h2><strong>
+              3 Producto -
+            </strong>
+          </h2>
+          <h3>subtotal</h3>
+        </ion-label>
+      </ion-item>
+
+      <ion-item-options side="end">
+        <ion-item-option color="dark" (click)="eliminar(item.id)">
+          <ion-icon name="trash"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+
+    </ion-item-sliding>
+
+    <div style="margin: 20px;">
+      <ion-button color="dark" expand="block" shape="round" type="submit" [disabled]="false">
+        Confirmar
+      </ion-button>
+    </div>
+
+  </ion-list>
+
+  <ion-fab vertical="bottom" horizontal="end">
+    <ion-fab-button color="light"><ion-icon name="caret-up"></ion-icon></ion-fab-button>
+
+    <ion-fab-list side="top">
+      <ion-fab-button><ion-icon name="add"></ion-icon></ion-fab-button>
+      <ion-fab-button><ion-icon name="pencil"></ion-icon></ion-fab-button>
+      <ion-fab-button><ion-icon src="../../../../assets/imgs/icons/emoticon.svg"></ion-icon></ion-fab-button>
+    </ion-fab-list>
+
+  </ion-fab>
 
 </ion-content>
