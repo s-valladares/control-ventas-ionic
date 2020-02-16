@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PedidosService } from 'src/app/Services/services.index';
 import { IPedidos } from 'src/app/Services/interfaces.index';
 import { ToastController, ModalController, AlertController } from '@ionic/angular';
+import { PedidosComponent } from '../pedidos-component/pedidos.component';
 
 @Component({
   selector: 'app-pedidos',
@@ -27,7 +28,7 @@ export class PedidosPage implements OnInit {
     this.service.getAll().then(res => {
       this.mPedidos = res.rows;
     }).catch(err => {
-      console.error(err);
+      console.log(err.error);
       this.presentToast('Error al obtener pedidos');
     });
   }
@@ -79,21 +80,21 @@ export class PedidosPage implements OnInit {
   }
 
   async modalPresent(id: string) {
-    /*const modal = await this.modalController.create({
-      component: ProductosComponent,
+    const modal = await this.modalController.create({
+      component: PedidosComponent,
       componentProps: {
-        idProducto: id
+        idPedido: id
       }
     });
 
     modal.onDidDismiss().then(data => {
       if (data.data) {
-        this.mProductos.push(data.data);
+       // this.mProductos.push(data.data);
       }
 
     }).catch(error => console.log(error));
 
-    return await modal.present();*/
+    return await modal.present();
   }
 
 }

@@ -1,0 +1,9 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-button slot="end" fill="clear" color="light" (click)=cerarModal()>
+      <ion-icon name="close"></ion-icon>
+    </ion-button>
+    <ion-title *ngIf="idPedido === ''">Agregar pedido</ion-title>
+    <ion-title *ngIf="idPedido !== ''">Detalles del pedido</ion-title>
+  </ion-toolbar>
+</ion-header>
