@@ -9,7 +9,7 @@ export interface IProductos {
     nombre: string;
     descripcion?: string;
     precio: number;
-    tipo: string;
+    tipo: IProductosTipos;
     createdAt?: string;
     updatedAt?: string;
     estado: boolean;
@@ -22,10 +22,30 @@ export class Productos {
             nombre: '',
             descripcion: '',
             precio: 0,
-            tipo: '',
+            tipo: null,
             createdAt: '',
             updatedAt: '',
             estado: true
-        }
+        };
+    }
+}
+
+
+export interface IProductosTiposRs {
+    size: number;
+    rows: IProductosTipos[];
+}
+
+export interface IProductosTipos {
+    id: string;
+    nombre: string;
+}
+
+export class ProductosTipos {
+    static empty() {
+        return {
+            id: '',
+            nombre: '',
+        };
     }
 }

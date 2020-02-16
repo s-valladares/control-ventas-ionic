@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 
 import { Config } from '../Config/config';
-import { IProductos, IProductosRs } from './productos.interface';
+import { IProductos, IProductosRs, IProductosTiposRs } from './productos.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +21,14 @@ export class ProductosService {
   getAll() {
     return this.httpClient.get(this.mUrl + this.mService).pipe(
       map((data: IProductosRs) => {
+        return data;
+      })).toPromise();
+  }
+
+  // Obtener listado de tipo de producto
+  getAllTipos() {
+    return this.httpClient.get(this.mUrl + 'productos-tipos').pipe(
+      map((data: IProductosTiposRs) => {
         return data;
       })).toPromise();
   }
@@ -44,8 +52,16 @@ export class ProductosService {
   // Crear producto
   create(obj: IProductos) {
     return this.httpClient.post(this.mUrl + this.mService, obj).pipe(
-      map((data: IProductos) => {
+      map((data: any) => {
         return data;
       })).toPromise();
+  }
+
+  // Eliminar producto
+  delete(pKey: string) {
+    return this.httpClient.delete(this.mUrl + this.mService + '/' + pKey)
+      // tslint:disable-next-line: arrow-return-shorthand
+      .pipe(map((data: any) => { return data; }))
+      .toPromise();
   }
 }
