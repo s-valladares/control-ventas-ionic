@@ -36,11 +36,11 @@ export class ProductosPage implements OnInit {
     });
   }
 
-  deleteProducto(id: any) {
+  delete(id: any) {
     this.presentToast('Pendiente');
   }
 
-  verProducto(id) {
+  verInfo(id) {
     console.log(id);
   }
 
@@ -59,7 +59,7 @@ export class ProductosPage implements OnInit {
         }, {
           text: 'Sí, Seguro',
           handler: () => {
-            this.deleteProducto(id);
+            this.delete(id);
           }
         }
       ]
@@ -80,7 +80,7 @@ export class ProductosPage implements OnInit {
     toast.present();
   }
 
-  async modalProductoCrear() {
+  async modalPresent() {
     const modal = await this.modalController.create({
       component: ProductosComponent
     });
@@ -95,8 +95,8 @@ export class ProductosPage implements OnInit {
     return await modal.present();
   }
 
-  crearProducto() {
-    this.modalProductoCrear();
+  nuevo() {
+    this.modalPresent();
   }
 
 
