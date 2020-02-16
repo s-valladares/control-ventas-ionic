@@ -7,3 +7,55 @@
     <ion-title *ngIf="idPedido !== ''">Detalles del pedido</ion-title>
   </ion-toolbar>
 </ion-header>
+
+<ion-content>
+
+
+
+  <div *ngIf="idPedido === ''">
+    <form [formGroup]="form" (ngSubmit)="guardar()">
+
+      <ion-list>
+
+        <ion-item>
+          <ion-label position="floating">
+            <ion-text color="dark">Cliente</ion-text>
+          </ion-label>
+          <ion-input required type="text" formControlName="cliente"></ion-input>
+        </ion-item>
+
+
+        <ion-item>
+          <ion-label position="floating">
+            <ion-text color="dark">Nota</ion-text>
+          </ion-label>
+          <ion-input required type="text" formControlName="nota"></ion-input>
+        </ion-item>
+
+
+        <ion-item>
+          <ion-label position="floating">
+            <ion-text color="dark">Fecha de entrega</ion-text>
+          </ion-label>
+          <ion-datetime cancel-text="Cancelar" done-text="Ok" value="" [placeholder]="fechaHoy | date" display-timezone="utc" formControlName="entrega"></ion-datetime>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">
+            <ion-text color="dark">Hora de entrega</ion-text>
+          </ion-label>
+          <ion-datetime cancel-text="Cancelar" done-text="Ok" value="" [placeholder]="fechaHoy | date: 'shortTime'" display-format="h:mm A" picker-format="h:mm A" formControlName="hora"></ion-datetime>
+        </ion-item>
+
+        <div style="margin: 20px;">
+          <ion-button color="dark" expand="block" shape="round" type="submit" [disabled]="!form.valid">
+            Guardar
+          </ion-button>
+        </div>
+
+      </ion-list>
+    </form>
+  </div>
+
+
+</ion-content>

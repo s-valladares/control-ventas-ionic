@@ -17,7 +17,11 @@
 
       <ion-item (click)="verInfo(item.id)">
         <ion-label>
-          <h2><strong>{{item.cliente}} - {{item.entrega  | date}}</strong></h2>
+          <h2><strong>
+            {{item.cliente}} - 
+            {{item.hora  | date: 'shortTime'}} - 
+            {{item.entrega  | date: 'MMM d'}} </strong>
+          </h2>
           <h3>{{item.nota}}</h3>
         </ion-label>
       </ion-item>

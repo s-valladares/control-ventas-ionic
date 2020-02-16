@@ -21,7 +21,7 @@ export class PedidosPage implements OnInit {
     private alertController: AlertController
   ) {
     this.idPedido = '';
-   }
+  }
 
   ngOnInit() {
     this.getAll();
@@ -100,7 +100,7 @@ export class PedidosPage implements OnInit {
 
     modal.onDidDismiss().then(data => {
       if (data.data) {
-       // this.mProductos.push(data.data);
+        this.mPedidos.push(data.data);
       }
 
     }).catch(error => console.log(error));
