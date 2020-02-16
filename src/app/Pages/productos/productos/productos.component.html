@@ -4,14 +4,14 @@
       <ion-icon name="close"></ion-icon>
     </ion-button>
     <ion-title *ngIf="idProducto === ''">Agregar producto</ion-title>
-    <ion-title *ngIf="idProducto !== ''">Editar producto</ion-title>
+    <ion-title *ngIf="idProducto !== ''">Detalles del producto</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   
   <div *ngIf="idProducto !== ''">
-    Editar
+    Detalles
   </div>
 
   <div *ngIf="idProducto === ''">
