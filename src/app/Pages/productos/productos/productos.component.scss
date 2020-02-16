@@ -1,0 +1,17 @@
+div {
+
+    &.centrar {
+      width: 40%;
+      display: block;
+      margin: 0 auto;
+      
+    }
+
+    &.bigger {
+      width: 50px;
+      height: 50px;
+      display: block;
+      margin: 0 auto;
+    }
+
+  }

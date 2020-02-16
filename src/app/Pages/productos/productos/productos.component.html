@@ -9,9 +9,27 @@
 </ion-header>
 
 <ion-content>
-  
+
   <div *ngIf="idProducto !== ''">
-    Detalles
+    <ion-card>
+   
+        <div class="centrar">
+          <ion-img *ngIf="mTipo.nombre === 'Bebidas'" src="../../../../assets/imgs/frappeC.svg" ></ion-img>
+          <ion-img *ngIf="mTipo.nombre === 'Refacciones'" src="../../../../assets/imgs/nachos.svg" ></ion-img>
+        </div>
+   
+      <ion-card-header>
+
+        <ion-card-title>{{mProducto.nombre}}</ion-card-title>
+        <ion-card-subtitle>Precio: Q{{mProducto.precio | number:'1.2-2'}}</ion-card-subtitle>
+      </ion-card-header>
+
+      <ion-card-content>
+        <h3>Tipo: {{mTipo.nombre}}</h3>
+        <h3>Descripción: {{mProducto.descripcion}}</h3>
+        
+      </ion-card-content>
+    </ion-card>
   </div>
 
   <div *ngIf="idProducto === ''">

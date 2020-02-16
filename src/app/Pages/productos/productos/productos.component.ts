@@ -15,6 +15,7 @@ export class ProductosComponent implements OnInit {
 
   form: FormGroup;
   mProducto: IProductos;
+  mTipo: IProductosTipos;
   mProductosTipos: IProductosTipos[];
 
   constructor(
@@ -24,13 +25,14 @@ export class ProductosComponent implements OnInit {
     private toastController: ToastController
   ) {
     this.mProducto = Productos.empty();
+    this.mTipo = ProductosTipos.empty();
   }
 
   ngOnInit() {
     this.getAllProductosTipos();
 
     if (this.idProducto !== '') {
-      
+      this.getAllProductosId();
     }
 
     this.form = this.formBuilder.group({
@@ -52,6 +54,16 @@ export class ProductosComponent implements OnInit {
     }).catch(err => {
       console.error(err);
       this.presentToast('Error al obtener productos');
+    });
+  }
+
+  getAllProductosId() {
+    this.service.getId(this.idProducto).then(res => {
+      this.mTipo = res.tipo;
+      this.mProducto = res;
+    }).catch(err => {
+      console.error(err);
+      this.presentToast('Error al obtener producto');
     });
   }
 
