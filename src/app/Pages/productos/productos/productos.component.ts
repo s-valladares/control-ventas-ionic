@@ -69,7 +69,6 @@ export class ProductosComponent implements OnInit {
 
   guardar() {
     this.mProducto = this.form.value as IProductos;
-    this.mProducto.estado = true;
     console.log(this.mProducto);
     this.service.create(this.mProducto)
       .then(res => {

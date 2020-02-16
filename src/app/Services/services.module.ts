@@ -3,7 +3,8 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 
 import {
-  ProductosService
+  ProductosService,
+  PedidosService
 } from './services.index';
 
 @NgModule({
@@ -13,7 +14,8 @@ import {
     CommonModule
   ],
   providers: [
-    ProductosService
+    ProductosService,
+    PedidosService
   ]
 })
 export class ServicesModule { }
