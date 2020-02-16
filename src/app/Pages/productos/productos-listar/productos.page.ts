@@ -23,11 +23,11 @@ export class ProductosPage implements OnInit {
   }
 
   ngOnInit() {
-    this.getAllProductos();
+    this.getAll();
 
   }
 
-  getAllProductos() {
+  getAll() {
     this.service.getAll().then(res => {
       this.mProductos = res.rows;
     }).catch(err => {
