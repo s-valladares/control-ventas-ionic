@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProductosService } from 'src/app/Services/services.index';
 import { IProductos } from 'src/app/Services/interfaces.index';
 import { ToastController, ModalController, AlertController } from '@ionic/angular';
-import { ProductosComponent } from '../productos/productos.component';
+import { ProductosComponent } from '../productos-component/productos.component';
 
 @Component({
   selector: 'app-productos',
@@ -99,5 +99,5 @@ export class ProductosPage implements OnInit {
     return await modal.present();
   }
 
-  
+
 }
