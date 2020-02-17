@@ -27,7 +27,7 @@ export class ProductosService {
 
   // Obtener listado de tipo de producto
   getAllTipos() {
-    return this.httpClient.get(this.mUrl + 'productos-tipos').pipe(
+    return this.httpClient.get(this.mUrl + 'productos/tipos').pipe(
       map((data: IProductosTiposRs) => {
         return data;
       })).toPromise();

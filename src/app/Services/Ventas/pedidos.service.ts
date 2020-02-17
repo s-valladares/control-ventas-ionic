@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 
 import { Config } from '../Config/config';
-import { IPedidos, IPedidosRs } from './pedidos.interface';
+import { IPedidos, IPedidosRs, IPedidosDetallesRs } from './pedidos.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -55,5 +55,16 @@ export class PedidosService {
       // tslint:disable-next-line: arrow-return-shorthand
       .pipe(map((data: any) => { return data; }))
       .toPromise();
+  }
+
+
+
+  /******* DETALLES DE PEDIDO */
+  // Obtener detalles de pedido a partir de id de pedido
+  getAllDetallesPedidoId(id) {
+    return this.httpClient.get(this.mUrl + this.mService + '/detalles/' + id).pipe(
+      map((data: IPedidosDetallesRs) => {
+        return data;
+      })).toPromise();
   }
 }

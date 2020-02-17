@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ModalController, ToastController } from '@ionic/angular';
-import { IPedidos, Pedidos } from 'src/app/Services/interfaces.index';
+import { IPedidos, Pedidos, IPedidosDetalles, PedidosDetalles } from 'src/app/Services/interfaces.index';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { PedidosService } from 'src/app/Services/services.index';
 
@@ -15,7 +15,10 @@ export class PedidosComponent implements OnInit {
 
   form: FormGroup;
   mPedido: IPedidos;
+  mPedidoDetalles: IPedidosDetalles[];
+  mPedidoDetalle: IPedidosDetalles;
   fechaHoy: Date;
+  totalPedido: number;
 
   constructor(
     private modal: ModalController,
@@ -26,14 +29,18 @@ export class PedidosComponent implements OnInit {
   ) {
     this.fechaHoy = new Date();
     this.mPedido = Pedidos.empty();
+    this.mPedidoDetalles = [];
+    this.mPedidoDetalle = PedidosDetalles.empty();
+    this.totalPedido = 0;
   }
 
   ngOnInit() {
 
     if (this.idPedido !== '') {
-      this.getAllProductosId();
+      this.getPedidoId();
     }
 
+    // FORMULARIO PARA CREAR UN PEDIDO
     this.form = this.formBuilder.group({
       cliente: ['', [Validators.required]],
       nota: [''],
@@ -43,9 +50,10 @@ export class PedidosComponent implements OnInit {
 
   }
 
-  getAllProductosId() {
+  getPedidoId() {
     this.service.getId(this.idPedido).then(res => {
       this.mPedido = res;
+      this.getDetallesPedidoId();
     }).catch(err => {
       console.error(err);
       this.presentToast('Error al obtener pedido');
@@ -78,6 +86,26 @@ export class PedidosComponent implements OnInit {
       position: 'bottom'
     });
     toast.present();
+  }
+
+  /********* DETALLES DEL PEDIDO */
+
+  getDetallesPedidoId() {
+    this.service.getAllDetallesPedidoId(this.idPedido).then(res => {
+      this.mPedidoDetalles = res.rows;
+      console.log(this.mPedidoDetalles);
+      this.calcularTotalPedido();
+    }).catch(err => {
+      console.error(err);
+      this.presentToast('Error al obtener pedido');
+    });
+  }
+
+  calcularTotalPedido(){
+    this.totalPedido = 0;
+    this.mPedidoDetalles.forEach(detalle => {
+      this.totalPedido = this.totalPedido + detalle.total;
+    });
   }
 
 }
