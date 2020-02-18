@@ -3,14 +3,15 @@
     <ion-button slot="end" fill="clear" color="light" (click)=cerarModal()>
       <ion-icon name="close"></ion-icon>
     </ion-button>
-    <ion-title *ngIf="idProducto === ''">Agregar producto</ion-title>
-    <ion-title *ngIf="idProducto !== ''">Detalles del producto</ion-title>
+    <ion-title *ngIf="tipoUso === 'CREAR'">Agregar producto</ion-title>
+    <ion-title *ngIf="tipoUso === 'VER'">Detalles del producto</ion-title>
+    <ion-title *ngIf="tipoUso === 'ELEGIR'">Elegir producto</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
-  <div *ngIf="idProducto !== ''">
+  <div *ngIf="tipoUso === 'VER'">
     <ion-card>
    
         <div class="centrar">
@@ -32,7 +33,7 @@
     </ion-card>
   </div>
 
-  <div *ngIf="idProducto === ''">
+  <div *ngIf="tipoUso === 'CREAR'">
     <form [formGroup]="form" (ngSubmit)="guardar()">
 
       <ion-list>
@@ -81,5 +82,32 @@
     </form>
   </div>
 
+  <div *ngIf="tipoUso === 'ELEGIR'">
+    <ion-list>
+
+      <ion-item-sliding *ngFor="let item of mProductos">
+  
+        <ion-item (click)="elegirProducto(item)">
+          <ion-avatar slot="start">
+            <img *ngIf="item.tipo.nombre === 'Bebidas'" src="../../../../assets/imgs/frappeC.svg">
+            <img *ngIf="item.tipo.nombre === 'Refacciones'" src="../../../../assets/imgs/nachos.svg">
+          </ion-avatar>
+          <ion-label>
+            <h2><strong>{{item.nombre}} - Q{{item.precio | number:'1.2-2'}}</strong></h2>
+            <h3>{{item.descripcion}}</h3>
+          </ion-label>
+        </ion-item>
+  
+        <ion-item-options side="end">
+          <ion-item-option color="dark" (click)="eliminar(item.id)">
+            <ion-icon name="trash"></ion-icon>
+          </ion-item-option>
+        </ion-item-options>
+  
+      </ion-item-sliding>
+  
+  
+    </ion-list>
+  </div>
 
 </ion-content>

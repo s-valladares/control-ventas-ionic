@@ -13,16 +13,12 @@ import { ProductosComponent } from '../productos-component/productos.component';
   imports: [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule,
     IonicModule,
     ProductosPageRoutingModule
   ],
   declarations: [
     ProductosPage,
-    ProductosComponent
-  ],
-  entryComponents: [
-    ProductosComponent
+
   ]
 })
 export class ProductosPageModule {}

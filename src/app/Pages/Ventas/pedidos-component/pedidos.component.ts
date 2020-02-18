@@ -3,6 +3,8 @@ import { ModalController, ToastController } from '@ionic/angular';
 import { IPedidos, Pedidos, IPedidosDetalles, PedidosDetalles } from 'src/app/Services/interfaces.index';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { PedidosService } from 'src/app/Services/services.index';
+import { ProductosComponent } from '../../Productos/productos-component/productos.component';
+import { Config } from 'src/app/Services/Config/config';
 
 @Component({
   selector: 'app-pedidos',
@@ -23,6 +25,7 @@ export class PedidosComponent implements OnInit {
   constructor(
     private modal: ModalController,
     private formBuilder: FormBuilder,
+    private modalController: ModalController,
 
     private service: PedidosService,
     private toastController: ToastController
@@ -88,6 +91,8 @@ export class PedidosComponent implements OnInit {
     toast.present();
   }
 
+
+
   /********* DETALLES DEL PEDIDO */
 
   getDetallesPedidoId() {
@@ -106,6 +111,29 @@ export class PedidosComponent implements OnInit {
     this.mPedidoDetalles.forEach(detalle => {
       this.totalPedido = this.totalPedido + detalle.total;
     });
+  }
+
+  agregarProductoPedido() {
+    this.modalPresent(this.idPedido, Config.ELEGIR);
+  }
+
+  async modalPresent(id: string, tipo: string) {
+    const modal = await this.modalController.create({
+      component: ProductosComponent,
+      componentProps: {
+        idPedido: id,
+        tipoUso: tipo
+      }
+    });
+
+    modal.onDidDismiss().then(data => {
+      if (data.data) {
+       // this.mProductos.push(data.data);
+      }
+
+    }).catch(error => console.log(error));
+
+    return await modal.present();
   }
 
 }

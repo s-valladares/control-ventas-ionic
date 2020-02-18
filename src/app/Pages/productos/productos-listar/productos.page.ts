@@ -3,6 +3,7 @@ import { ProductosService } from 'src/app/Services/services.index';
 import { IProductos } from 'src/app/Services/interfaces.index';
 import { ToastController, ModalController, AlertController } from '@ionic/angular';
 import { ProductosComponent } from '../productos-component/productos.component';
+import { Config } from 'src/app/Services/Config/config';
 
 @Component({
   selector: 'app-productos',
@@ -41,11 +42,11 @@ export class ProductosPage implements OnInit {
   }
 
   nuevo() {
-    this.modalPresent('');
+    this.modalPresent('', Config.CREAR);
   }
 
   verInfo(id) {
-    this.modalPresent(id);
+    this.modalPresent(id, Config.VER);
   }
 
   async eliminar(id: any) {
@@ -81,11 +82,12 @@ export class ProductosPage implements OnInit {
     toast.present();
   }
 
-  async modalPresent(id: string) {
+  async modalPresent(id: string, tipo: string) {
     const modal = await this.modalController.create({
       component: ProductosComponent,
       componentProps: {
-        idProducto: id
+        idProducto: id,
+        tipoUso: tipo
       }
     });
 

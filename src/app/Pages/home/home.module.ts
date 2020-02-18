@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 
 import { HomePage } from './home.page';
+import { ProductosComponent } from '../Productos/productos-component/productos.component';
+import { ProductoConfirmarComponent } from '../Productos/producto-confirmar/producto-confirmar.component';
 
 const routes: Routes = [
   {
@@ -45,9 +47,18 @@ const routes: Routes = [
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [HomePage]
+  declarations: [
+    HomePage,
+    ProductosComponent,
+    ProductoConfirmarComponent
+  ],
+  entryComponents: [
+    ProductosComponent,
+    ProductoConfirmarComponent
+  ]
 })
 export class HomePageModule { }
