@@ -41,10 +41,10 @@ export class ProductoConfirmarComponent implements OnInit {
 
     this.mDetallePedido.total = this.mDetallePedido.producto.precio * this.cantidad;
 
-    console.log(this.mDetallePedido);
     this.service.newDetallePedido(this.mDetallePedido)
       .then(res => {
-        console.log(res);
+        this.presentToast('Vamos bien Ramírez');
+        this.cerarModal(res.RES);
       })
       .catch(error => {
         console.error(error);
@@ -62,7 +62,7 @@ export class ProductoConfirmarComponent implements OnInit {
     toast.present();
   }
 
-  cerarModal(ob: IProductos) {
+  cerarModal(ob: IPedidosDetalles) {
     this.modalCtrl2.dismiss(ob);
   }
 

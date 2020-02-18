@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ModalController, ToastController } from '@ionic/angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { IProductos, Productos, IProductosTipos, ProductosTipos } from 'src/app/Services/interfaces.index';
+import { IProductos, Productos, IProductosTipos, ProductosTipos, IPedidosDetalles } from 'src/app/Services/interfaces.index';
 import { ProductosService } from 'src/app/Services/services.index';
 import { Config } from 'src/app/Services/Config/config';
 import { ProductoConfirmarComponent } from '../producto-confirmar/producto-confirmar.component';
@@ -22,6 +22,7 @@ export class ProductosComponent implements OnInit {
   mProductos: IProductos[];
   mTipo: IProductosTipos;
   mProductosTipos: IProductosTipos[];
+  mDetalles: IPedidosDetalles[];
 
   constructor(
     private modalCtrl: ModalController,
@@ -33,6 +34,7 @@ export class ProductosComponent implements OnInit {
     this.mTipo = ProductosTipos.empty();
 
     this.mProductos = [];
+    this.mDetalles = [];
   }
 
   ngOnInit() {
@@ -99,7 +101,7 @@ export class ProductosComponent implements OnInit {
     console.log(this.mProducto);
     this.service.create(this.mProducto)
       .then(res => {
-        this.cerarModal(res.RES);
+        this.cerarModal();
         this.presentToast('Guardado correctamente');
       })
       .catch(error => {
@@ -121,8 +123,8 @@ export class ProductosComponent implements OnInit {
     toast.present();
   }
 
-  cerarModal(ob: IProductos) {
-    this.modalCtrl.dismiss(ob);
+  cerarModal() {
+    this.modalCtrl.dismiss(this.mDetalles);
   }
 
   async modalConfirmarProducto() {
@@ -137,7 +139,7 @@ export class ProductosComponent implements OnInit {
 
     modal.onDidDismiss().then(data => {
       if (data.data) {
-        // this.mProductos.push(data.data);
+        this.mDetalles = data.data;
       }
 
     }).catch(error => console.log(error));

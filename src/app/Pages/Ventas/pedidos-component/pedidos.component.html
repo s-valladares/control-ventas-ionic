@@ -71,13 +71,13 @@
 
       <ion-item-sliding *ngFor="let item of mPedidoDetalles">
   
-        <ion-item (click)="verInfo(item.id)">
+        <ion-item>
           <ion-label>
             <h2><strong>
               {{ item.cantidad}} {{ item.producto.nombre}}
               </strong>
             </h2>
-            <h3>Q{{item.total | number:'1.2-2'}}</h3>
+            <h3>Subtotal Q{{item.total | number:'1.2-2'}}</h3>
           </ion-label>
         </ion-item>
   

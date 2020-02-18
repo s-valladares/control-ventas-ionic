@@ -106,7 +106,7 @@ export class PedidosComponent implements OnInit {
     });
   }
 
-  calcularTotalPedido(){
+  calcularTotalPedido() {
     this.totalPedido = 0;
     this.mPedidoDetalles.forEach(detalle => {
       this.totalPedido = this.totalPedido + detalle.total;
@@ -127,8 +127,8 @@ export class PedidosComponent implements OnInit {
     });
 
     modal.onDidDismiss().then(data => {
-      if (data.data) {
-       // this.mProductos.push(data.data);
+      if (data.data.length !== 0) {
+        this.mPedidoDetalles.push(data.data);
       }
 
     }).catch(error => console.log(error));
