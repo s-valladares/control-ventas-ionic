@@ -13,7 +13,7 @@ export class ProductoConfirmarComponent implements OnInit {
   @Input() producto: IProductos;
   @Input() idPedido: string;
 
-  cantidad: number;
+
   mPedido: IPedidos;
   mDetallePedido: IPedidosDetalles;
   mPedidoDetalles: IPedidosDetalles[];
@@ -23,25 +23,25 @@ export class ProductoConfirmarComponent implements OnInit {
     private toastController: ToastController,
     private modal: ModalController
   ) {
-    this.cantidad = 0;
+
     this.mDetallePedido = PedidosDetalles.empty();
     this.mPedido = Pedidos.empty();
     this.mPedidoDetalles = [];
   }
 
   ngOnInit() {
-
+    console.log('id pedido', this.idPedido);
   }
 
 
 
   confirmar() {
     this.mPedido.id = this.idPedido;
-    this.mDetallePedido.cantidad = this.cantidad;
     this.mDetallePedido.pedido = this.mPedido;
     this.mDetallePedido.producto = this.producto;
 
-    this.mDetallePedido.total = this.mDetallePedido.producto.precio * this.cantidad;
+    this.mDetallePedido.subtotal = (this.mDetallePedido.producto.precio * this.mDetallePedido.cantidad);
+    this.mDetallePedido.total = this.mDetallePedido.subtotal + this.mDetallePedido.adicional;
 
     this.service.newDetallePedido(this.mDetallePedido)
       .then(res => {
@@ -49,7 +49,7 @@ export class ProductoConfirmarComponent implements OnInit {
         this.getDetallesPedidoId();
       })
       .catch(error => {
-
+        console.log(error);
         this.presentToast('Ocurrió un error');
       });
 
@@ -63,6 +63,7 @@ export class ProductoConfirmarComponent implements OnInit {
       this.presentToast('Error al obtener pedido');
     });
   }
+
 
   async presentToast(msg) {
     const toast = await this.toastController.create({

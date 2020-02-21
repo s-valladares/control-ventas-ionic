@@ -39,8 +39,11 @@ export interface IPedidosDetallesRs {
 export interface IPedidosDetalles {
     id: string;
     cantidad: number;
+    subtotal: number;
     total?: number;
     producto: IProductos;
+    adicional: number;
+    comentario: string;
     pedido: IPedidos;
 }
 
@@ -50,6 +53,9 @@ export class PedidosDetalles {
             id: '',
             cantidad: 0,
             total: 0,
+            adicional: 0,
+            subtotal: 0,
+            comentario: '',
             producto: Productos.empty(),
             pedido: Pedidos.empty(),
         };

@@ -19,7 +19,23 @@
           <ion-label position="floating">
             <ion-text color="dark">Cantidad</ion-text>
           </ion-label>
-          <ion-input required type="number" [(ngModel)]="cantidad"></ion-input>
+          <ion-input required type="number" [(ngModel)]="mDetallePedido.cantidad"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">
+            <ion-text color="dark">Adicional</ion-text>
+          </ion-label>
+          <ion-input required type="number" [(ngModel)]="mDetallePedido.adicional" placeholder="Agregar costo adicional"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">
+            <ion-text color="dark">Comentario o nota</ion-text>
+          </ion-label>
+          <ion-textarea [(ngModel)]="mDetallePedido.comentario"
+                placeholder="Comentario en esta parte">
+            </ion-textarea>
         </ion-item>
 
 

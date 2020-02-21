@@ -117,6 +117,7 @@ export class PedidosComponent implements OnInit {
     this.service.deleteDetallePedido(this.idPedido)
     .then(data => {
       this.presentToast('¡Qué mal Ramírez!');
+      this.calcularTotalPedido();
       this.getDetallesPedidoId();
     });
   }
@@ -158,6 +159,7 @@ export class PedidosComponent implements OnInit {
     modal.onDidDismiss().then(data => {
       if (data.data.length !== 0) {
         this.mPedidoDetalles = data.data;
+        this.calcularTotalPedido();
       }
 
     }).catch(error => this.presentToast('Ocurrió un error'));
