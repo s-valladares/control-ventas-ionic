@@ -66,7 +66,6 @@ export class ProductosComponent implements OnInit {
     this.service.getAll().then(res => {
       this.mProductos = res.rows;
     }).catch(err => {
-      console.error(err);
       this.presentToast('Error al obtener productos');
     });
   }
@@ -81,7 +80,6 @@ export class ProductosComponent implements OnInit {
     this.service.getAllTipos().then(res => {
       this.mProductosTipos = res.rows;
     }).catch(err => {
-      console.error(err);
       this.presentToast('Error al obtener productos');
     });
   }
@@ -91,21 +89,18 @@ export class ProductosComponent implements OnInit {
       this.mTipo = res.tipo;
       this.mProducto = res;
     }).catch(err => {
-      console.error(err);
       this.presentToast('Error al obtener producto');
     });
   }
 
   guardar() {
     this.mProducto = this.form.value as IProductos;
-    console.log(this.mProducto);
     this.service.create(this.mProducto)
       .then(res => {
         this.cerarModal();
         this.presentToast('Guardado correctamente');
       })
       .catch(error => {
-        console.error(error);
         this.presentToast('Ocurrió un error');
       });
 
@@ -128,7 +123,7 @@ export class ProductosComponent implements OnInit {
   }
 
   async modalConfirmarProducto() {
-    console.log(this.mProducto);
+
     const modal = await this.modalCtrl.create({
       component: ProductoConfirmarComponent,
       componentProps: {
@@ -142,7 +137,7 @@ export class ProductosComponent implements OnInit {
         this.mDetalles = data.data;
       }
 
-    }).catch(error => console.log(error));
+    }).catch(error => this.presentToast('No se obtuvo el detalle'));
 
     return await modal.present();
   }

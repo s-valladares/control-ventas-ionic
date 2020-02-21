@@ -12,23 +12,25 @@ export class ProductoConfirmarComponent implements OnInit {
 
   @Input() producto: IProductos;
   @Input() idPedido: string;
-  
+
   cantidad: number;
   mPedido: IPedidos;
   mDetallePedido: IPedidosDetalles;
+  mPedidoDetalles: IPedidosDetalles[];
 
   constructor(
     private service: PedidosService,
     private toastController: ToastController,
-    private modalCtrl2: ModalController
+    private modal: ModalController
   ) {
     this.cantidad = 0;
     this.mDetallePedido = PedidosDetalles.empty();
     this.mPedido = Pedidos.empty();
-   }
+    this.mPedidoDetalles = [];
+  }
 
   ngOnInit() {
-    console.log(this.idPedido);
+
   }
 
 
@@ -44,13 +46,22 @@ export class ProductoConfirmarComponent implements OnInit {
     this.service.newDetallePedido(this.mDetallePedido)
       .then(res => {
         this.presentToast('Vamos bien Ramírez');
-        this.cerarModal(res.RES);
+        this.getDetallesPedidoId();
       })
       .catch(error => {
-        console.error(error);
+
         this.presentToast('Ocurrió un error');
       });
 
+  }
+
+  getDetallesPedidoId() {
+    this.service.getAllDetallesPedidoId(this.idPedido).then(res => {
+      this.mPedidoDetalles = res.rows;
+      this.cerarModal();
+    }).catch(err => {
+      this.presentToast('Error al obtener pedido');
+    });
   }
 
   async presentToast(msg) {
@@ -62,8 +73,9 @@ export class ProductoConfirmarComponent implements OnInit {
     toast.present();
   }
 
-  cerarModal(ob: IPedidosDetalles) {
-    this.modalCtrl2.dismiss(ob);
+  cerarModal() {
+
+    this.modal.dismiss(this.mPedidoDetalles);
   }
 
 

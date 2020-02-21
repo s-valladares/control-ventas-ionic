@@ -58,21 +58,18 @@ export class PedidosComponent implements OnInit {
       this.mPedido = res;
       this.getDetallesPedidoId();
     }).catch(err => {
-      console.error(err);
       this.presentToast('Error al obtener pedido');
     });
   }
 
   guardar() {
     this.mPedido = this.form.value as IPedidos;
-    console.log(this.mPedido);
     this.service.create(this.mPedido)
       .then(res => {
         this.cerarModal(res.RES);
         this.presentToast('Guardado correctamente');
       })
       .catch(error => {
-        console.error(error);
         this.presentToast('Ocurrió un error');
       });
 
@@ -98,10 +95,8 @@ export class PedidosComponent implements OnInit {
   getDetallesPedidoId() {
     this.service.getAllDetallesPedidoId(this.idPedido).then(res => {
       this.mPedidoDetalles = res.rows;
-      console.log(this.mPedidoDetalles);
       this.calcularTotalPedido();
     }).catch(err => {
-      console.error(err);
       this.presentToast('Error al obtener pedido');
     });
   }
@@ -128,10 +123,10 @@ export class PedidosComponent implements OnInit {
 
     modal.onDidDismiss().then(data => {
       if (data.data.length !== 0) {
-        this.mPedidoDetalles.push(data.data);
+        this.mPedidoDetalles = data.data;
       }
 
-    }).catch(error => console.log(error));
+    }).catch(error => this.presentToast('Ocurrió un error'));
 
     return await modal.present();
   }

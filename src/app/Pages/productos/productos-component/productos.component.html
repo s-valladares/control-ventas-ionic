@@ -33,6 +33,7 @@
     </ion-card>
   </div>
 
+
   <div *ngIf="tipoUso === 'CREAR'">
     <form [formGroup]="form" (ngSubmit)="guardar()">
 
@@ -82,6 +83,7 @@
     </form>
   </div>
 
+  
   <div *ngIf="tipoUso === 'ELEGIR'">
     <ion-list>
 
