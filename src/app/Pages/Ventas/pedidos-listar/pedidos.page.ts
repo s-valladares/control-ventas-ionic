@@ -60,7 +60,7 @@ export class PedidosPage implements OnInit {
     this.idPedido = id;
     const alert = await this.alertController.create({
       header: '¿Eliminar?',
-      message: '<strong>¿Está seguro de eliminar este producto?</strong>',
+      message: '<strong>¿Está seguro de eliminar este pedido?</strong>',
       buttons: [
         {
           text: 'No, Cancelar',

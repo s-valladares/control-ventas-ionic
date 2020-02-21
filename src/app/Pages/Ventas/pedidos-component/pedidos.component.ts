@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ModalController, ToastController } from '@ionic/angular';
+import { ModalController, ToastController, AlertController } from '@ionic/angular';
 import { IPedidos, Pedidos, IPedidosDetalles, PedidosDetalles } from 'src/app/Services/interfaces.index';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { PedidosService } from 'src/app/Services/services.index';
@@ -26,6 +26,7 @@ export class PedidosComponent implements OnInit {
     private modal: ModalController,
     private formBuilder: FormBuilder,
     private modalController: ModalController,
+    private alertController: AlertController,
 
     private service: PedidosService,
     private toastController: ToastController
@@ -110,6 +111,39 @@ export class PedidosComponent implements OnInit {
 
   agregarProductoPedido() {
     this.modalPresent(this.idPedido, Config.ELEGIR);
+  }
+
+  eliminarDetallePedido() {
+    this.service.deleteDetallePedido(this.idPedido)
+    .then(data => {
+      this.presentToast('¡Qué mal Ramírez!');
+      this.getDetallesPedidoId();
+    });
+  }
+
+  async alertaEliminar(id: any) {
+    this.idPedido = id;
+    const alert = await this.alertController.create({
+      header: '¿Eliminar?',
+      message: '<strong>¿Está seguro de eliminar este producto?</strong>',
+      buttons: [
+        {
+          text: 'No, Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+
+          }
+        }, {
+          text: 'Sí, Seguro',
+          handler: () => {
+            this.eliminarDetallePedido();
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 
   async modalPresent(id: string, tipo: string) {

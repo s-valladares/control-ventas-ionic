@@ -76,4 +76,12 @@ export class PedidosService {
         return data;
       })).toPromise();
   }
+
+  // Eliminar un detalle del pedido
+  deleteDetallePedido(pKey: string) {
+    return this.httpClient.delete(this.mUrl + this.mService + '/detalles/' + pKey)
+      // tslint:disable-next-line: arrow-return-shorthand
+      .pipe(map((data: any) => { return data; }))
+      .toPromise();
+  }
 }
