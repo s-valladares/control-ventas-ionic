@@ -70,6 +70,7 @@ export class PedidosComponent implements OnInit {
 
   guardar() {
     this.mPedido = this.form.value as IPedidos;
+    this.mPedido.estado = true;
     this.service.create(this.mPedido)
       .then(res => {
         this.cerarModal(res.RES);
@@ -100,6 +101,7 @@ export class PedidosComponent implements OnInit {
 
   getDetallesPedidoId() {
     this.service.getAllDetallesPedidoId(this.idPedido).then(res => {
+      console.log(this.idPedido);
       this.mPedidoDetalles = res.rows;
       this.calcularTotalPedido();
     }).catch(err => {
