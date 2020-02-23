@@ -5,6 +5,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { PedidosService } from 'src/app/Services/services.index';
 import { ProductosComponent } from '../../Productos/productos-component/productos.component';
 import { Config } from 'src/app/Services/Config/config';
+import { IVentas, Ventas } from 'src/app/Services/Ventas/ventas.interface';
+import { VentasService } from 'src/app/Services/Ventas/ventas.service';
 
 @Component({
   selector: 'app-pedidos',
@@ -19,6 +21,7 @@ export class PedidosComponent implements OnInit {
   mPedido: IPedidos;
   mPedidoDetalles: IPedidosDetalles[];
   mPedidoDetalle: IPedidosDetalles;
+  mVenta: IVentas;
   fechaHoy: Date;
   totalPedido: number;
 
@@ -29,10 +32,12 @@ export class PedidosComponent implements OnInit {
     private alertController: AlertController,
 
     private service: PedidosService,
+    private serviceVentas: VentasService,
     private toastController: ToastController
   ) {
     this.fechaHoy = new Date();
     this.mPedido = Pedidos.empty();
+    this.mVenta = Ventas.empty();
     this.mPedidoDetalles = [];
     this.mPedidoDetalle = PedidosDetalles.empty();
     this.totalPedido = 0;
@@ -115,10 +120,24 @@ export class PedidosComponent implements OnInit {
 
   eliminarDetallePedido() {
     this.service.deleteDetallePedido(this.idPedido)
-    .then(data => {
-      this.presentToast('¡Qué mal Ramírez!');
-      this.calcularTotalPedido();
-      this.getDetallesPedidoId();
+      .then(data => {
+        this.presentToast('¡Qué mal Ramírez!');
+        this.calcularTotalPedido();
+        this.getDetallesPedidoId();
+      });
+  }
+
+  registrarVenta() {
+    this.mVenta.total = this.totalPedido;
+    this.mVenta.pedido = this.mPedido;
+
+    this.serviceVentas.create(this.mVenta)
+    .then(res => {
+      this.presentToast('Venta registrada');
+
+    }).catch(error => {
+
+      this.presentToast('Ocurrió un error');
     });
   }
 

@@ -31,8 +31,9 @@ export class PedidosPage implements OnInit {
     this.service.getAll().then(res => {
       this.mPedidos = res.rows;
     }).catch(err => {
-      console.log(err.error);
-      this.presentToast('Error al obtener pedidos');
+      console.log(err);
+      const a = err.error.error;
+      alert(a);
     });
   }
 
