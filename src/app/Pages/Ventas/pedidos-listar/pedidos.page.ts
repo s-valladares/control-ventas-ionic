@@ -102,6 +102,8 @@ export class PedidosPage implements OnInit {
     modal.onDidDismiss().then(data => {
       if (data.data) {
         this.mPedidos.push(data.data);
+      } else {
+        this.getAll();
       }
 
     }).catch(error => console.log(error));

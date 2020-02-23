@@ -81,7 +81,7 @@ export class PedidosComponent implements OnInit {
 
   }
 
-  cerarModal(ob: IPedidos) {
+  cerarModal(ob) {
     this.modal.dismiss(ob);
   }
 
@@ -133,8 +133,9 @@ export class PedidosComponent implements OnInit {
 
     this.serviceVentas.create(this.mVenta)
     .then(res => {
+      alert('Venta registrada');
       this.presentToast('Venta registrada');
-
+      this.cerarModal('');
     }).catch(error => {
 
       this.presentToast('Ocurrió un error');
