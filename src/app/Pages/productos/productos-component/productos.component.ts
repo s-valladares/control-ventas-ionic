@@ -41,7 +41,10 @@ export class ProductosComponent implements OnInit {
 
     if (this.tipoUso === Config.CREAR || this.tipoUso === Config.VER) {
       this.getAllProductosTipos();
-      this.getAllProductosId();
+      if (this.tipoUso === Config.VER) {
+        this.getAllProductosId();
+      }
+
 
     }
     if (this.tipoUso === Config.CREAR) {
@@ -54,7 +57,7 @@ export class ProductosComponent implements OnInit {
     }
 
     if (this.tipoUso === Config.ELEGIR) {
-      this.getAllProductos()
+      this.getAllProductos();
     }
 
 
@@ -97,6 +100,7 @@ export class ProductosComponent implements OnInit {
     this.mProducto = this.form.value as IProductos;
     this.service.create(this.mProducto)
       .then(res => {
+        this.mProducto = res.RES;
         this.cerarModal();
         this.presentToast('Guardado correctamente');
       })
@@ -119,7 +123,22 @@ export class ProductosComponent implements OnInit {
   }
 
   cerarModal() {
-    this.modalCtrl.dismiss(this.mDetalles);
+    if (this.tipoUso === Config.CREAR) {
+      if (this.mProducto.nombre === '') {
+        this.modalCtrl.dismiss();
+      } else {
+        this.modalCtrl.dismiss(this.mProducto);
+      }
+    }
+
+    if (this.tipoUso === Config.VER) {
+      this.modalCtrl.dismiss();
+    }
+
+    if (this.tipoUso === Config.ELEGIR) {
+      this.modalCtrl.dismiss(this.mDetalles);
+    }
+
   }
 
   async modalConfirmarProducto() {

@@ -31,7 +31,6 @@ export class PedidosPage implements OnInit {
     this.service.getAll().then(res => {
       this.mPedidos = res.rows;
     }).catch(err => {
-      console.log(err);
       const a = err.error.error;
       alert(a);
     });
@@ -40,7 +39,6 @@ export class PedidosPage implements OnInit {
 
   delete() {
     this.service.delete(this.idPedido).then(res => {
-      console.log(res);
       this.presentToast('Eliminado con éxito');
       this.getAll();
     }).catch(err => {

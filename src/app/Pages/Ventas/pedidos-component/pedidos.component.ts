@@ -101,7 +101,7 @@ export class PedidosComponent implements OnInit {
 
   getDetallesPedidoId() {
     this.service.getAllDetallesPedidoId(this.idPedido).then(res => {
-      console.log(this.idPedido);
+
       this.mPedidoDetalles = res.rows;
       this.calcularTotalPedido();
     }).catch(err => {
