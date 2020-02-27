@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-button slot="end" fill="clear" color="light" (click)=cerarModal()>
+      <ion-icon name="close"></ion-icon>
+    </ion-button>
+    <ion-title *ngIf="idSemanaVenta === ''">Agregar semana de venta</ion-title>
+    <ion-title *ngIf="idSemanaVenta !== ''">Detalles de la semana</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div style="margin-top: 100px;" *ngIf="idSemanaVenta === ''">
+    
+    <ion-item>
+      <ion-label position="floating">
+        <ion-text color="dark">Fecha de inicio</ion-text>
+      </ion-label>
+      <ion-datetime cancel-text="Cancelar" done-text="Ok" value="" [placeholder]="fechaInicio | date"
+        display-timezone="utc" [(ngModel)]="fechaInicio"></ion-datetime>
+    </ion-item>
+
+    <div style="margin: 20px;">
+      <ion-button color="dark" expand="block" shape="round" (click)="iniciarVenta()">
+        Iniciar
+      </ion-button>
+    </div>
+
+  </div>
+
+</ion-content>

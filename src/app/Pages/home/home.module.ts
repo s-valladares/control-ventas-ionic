@@ -7,6 +7,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomePage } from './home.page';
 import { ProductosComponent } from '../Productos/productos-component/productos.component';
 import { ProductoConfirmarComponent } from '../Productos/producto-confirmar/producto-confirmar.component';
+import { GastoComponent } from '../egresos/gasto/gasto.component';
+import { SemanaventaComponent } from '../Ventas/semanaventa/semanaventa.component';
 
 const routes: Routes = [
   {
@@ -54,11 +56,15 @@ const routes: Routes = [
   declarations: [
     HomePage,
     ProductosComponent,
-    ProductoConfirmarComponent
+    ProductoConfirmarComponent,
+    GastoComponent,
+    SemanaventaComponent
   ],
   entryComponents: [
     ProductosComponent,
-    ProductoConfirmarComponent
+    ProductoConfirmarComponent,
+    GastoComponent,
+    SemanaventaComponent
   ]
 })
 export class HomePageModule { }

@@ -1,0 +1,61 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-button slot="end" fill="clear" color="light" (click)=cerarModal()>
+      <ion-icon name="close"></ion-icon>
+    </ion-button>
+    <ion-title *ngIf="idGasto === ''">Agregar gasto</ion-title>
+    <ion-title *ngIf="idGasto !== ''">Detalles del gasto</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+
+  <div *ngIf="idGasto === ''">
+    <form [formGroup]="form" (ngSubmit)="guardar()">
+
+      <ion-list>
+
+        <ion-item>
+          <ion-label position="floating">
+            <ion-text color="dark">Gasto</ion-text>
+          </ion-label>
+          <ion-input required type="text" formControlName="nombre"></ion-input>
+        </ion-item>
+
+
+        <ion-item>
+          <ion-label position="floating">
+            <ion-text color="dark">Descripción</ion-text>
+          </ion-label>
+          <ion-input required type="text" formControlName="descripcion"></ion-input>
+        </ion-item>
+
+
+        <ion-item>
+          <ion-label position="floating">
+            <ion-text color="dark">Fecha del gasto</ion-text>
+          </ion-label>
+          <ion-datetime cancel-text="Cancelar" done-text="Ok" value="" [placeholder]="fechaHoy | date"
+            display-timezone="utc" formControlName="fechaGasto"></ion-datetime>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">
+            <ion-text color="dark">Total</ion-text>
+          </ion-label>
+          <ion-input required type="number" formControlName="total"></ion-input>
+        </ion-item>
+
+
+        <div style="margin: 20px;">
+          <ion-button color="dark" expand="block" shape="round" type="submit" [disabled]="!form.valid">
+            Guardar
+          </ion-button>
+        </div>
+
+      </ion-list>
+    </form>
+  </div>
+
+</ion-content>
