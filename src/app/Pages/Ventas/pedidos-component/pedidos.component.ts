@@ -70,7 +70,9 @@ export class PedidosComponent implements OnInit {
 
   guardar() {
     this.mPedido = this.form.value as IPedidos;
+
     this.mPedido.estado = true;
+
     this.service.create(this.mPedido)
       .then(res => {
         this.cerarModal(res.RES);

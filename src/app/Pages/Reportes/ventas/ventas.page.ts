@@ -36,7 +36,6 @@ export class VentasPage implements OnInit {
     this.service.getAllSemanaVenta()
       .then(res => {
         this.ventasSemana = res.rows;
-        console.log(this.ventasSemana);
       })
       .catch(error => console.log(error));
   }

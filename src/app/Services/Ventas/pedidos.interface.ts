@@ -9,7 +9,7 @@ export interface IPedidos {
     id: string;
     cliente: string;
     nota?: string;
-    entrega: string;
+    entrega: Date;
     hora: string;
     createdAt?: string;
     updatedAt?: string;
@@ -22,7 +22,7 @@ export class Pedidos {
             id: '',
             cliente: '',
             nota: '',
-            entrega: '',
+            entrega: new Date(),
             hora: '',
             createdAt: '',
             updatedAt: '',

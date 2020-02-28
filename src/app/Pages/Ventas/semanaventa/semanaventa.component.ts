@@ -29,17 +29,17 @@ export class SemanaventaComponent implements OnInit {
   ngOnInit() { }
 
   cerarModal(ob) {
-    this.modal.dismiss(ob.RES);
+    this.modal.dismiss(ob);
   }
 
   iniciarVenta() {
-    
-    this.ventaSemana.fechaInicio = this.fechaInicio + 'T00:46:39.000Z';
-    console.log(this.ventaSemana.fechaInicio);
+
+    this.ventaSemana.fechaInicio = this.fechaInicio + 'T11:20:45.000+0000';
+
     this.service.createSemanaVenta(this.ventaSemana)
-    .then(data => {
-      this.cerarModal(data);
-    })
+      .then(data => {
+        this.cerarModal(data.RES);
+      })
       .catch(error => console.log(error));
   }
 
