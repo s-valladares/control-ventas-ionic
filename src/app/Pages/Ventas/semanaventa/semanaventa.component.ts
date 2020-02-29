@@ -73,7 +73,6 @@ export class SemanaventaComponent implements OnInit {
         this.totalVentasSemana = data.rows;
         this.calcularDineroVentas();
         this.getventaLastTime();
-        console.log(this.totalVentasSemana);
       })
       .catch(error => {
         this.presentToast('Ocurrió un error');

@@ -27,14 +27,12 @@ export class InfoPedidoComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.detallePedido);
     this.getDetallesPedidoId();
    }
 
    getDetallesPedidoId() {
     this.service.getAllDetallesPedidoId(this.idPedido).then(res => {
       this.mPedidoDetalles = res.rows;
-      console.log(this.mPedidoDetalles);
     }).catch(err => {
       this.presentToast('Error al obtener pedido');
     });
