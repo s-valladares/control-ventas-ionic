@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ModalController, ToastController } from '@ionic/angular';
 import { VentasService, ReportesService } from 'src/app/Services/services.index';
 import { IVentasSemana, VentasSemana, IVentas, Ventas } from 'src/app/Services/interfaces.index';
+import { InfoPedidoComponent } from '../../Reportes/otros/info-pedido/info-pedido.component';
 
 @Component({
   selector: 'app-semanaventa',
@@ -22,9 +23,10 @@ export class SemanaventaComponent implements OnInit {
 
   ventaLastTime: IVentas;
   fechaSemana: any;
+  mVenta: IVentas;
 
   constructor(
-    private modal: ModalController,
+    private modalC: ModalController,
     private service: VentasService,
     private serviceReportes: ReportesService,
     private toastController: ToastController
@@ -41,6 +43,7 @@ export class SemanaventaComponent implements OnInit {
     this.numeroVentas = 0;
     this.dineroVentas = 0;
     this.fechaSemana = '';
+    this.mVenta = Ventas.empty();
   }
 
   ngOnInit() {
@@ -50,7 +53,7 @@ export class SemanaventaComponent implements OnInit {
   }
 
   cerarModal(ob) {
-    this.modal.dismiss(ob);
+    this.modalC.dismiss(ob);
   }
 
   iniciarVenta() {
@@ -78,6 +81,11 @@ export class SemanaventaComponent implements OnInit {
       });
   }
 
+  verInfo(venta: IVentas) {
+    this.mVenta = venta;
+    this.modalPresent();
+  }
+
   getventaLastTime() {
     this.ventaLastTime = this.totalVentasSemana.reduce((r, a) => {
       return r.pedido.hora > a.pedido.hora ? r : a;
@@ -91,6 +99,18 @@ export class SemanaventaComponent implements OnInit {
       .forEach(v => {
         this.dineroVentas = this.dineroVentas + v.total;
       });
+  }
+
+  async modalPresent() {
+    const modal = await this.modalC.create({
+      component: InfoPedidoComponent,
+      componentProps: {
+        detallePedido: this.mVenta,
+        idPedido: this.mVenta.pedido.id
+      }
+    });
+
+    return await modal.present();
   }
 
   async presentToast(msg) {

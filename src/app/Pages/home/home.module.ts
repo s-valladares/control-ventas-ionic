@@ -9,6 +9,7 @@ import { ProductosComponent } from '../Productos/productos-component/productos.c
 import { ProductoConfirmarComponent } from '../Productos/producto-confirmar/producto-confirmar.component';
 import { GastoComponent } from '../egresos/gasto/gasto.component';
 import { SemanaventaComponent } from '../Ventas/semanaventa/semanaventa.component';
+import { InfoPedidoComponent } from '../Reportes/otros/info-pedido/info-pedido.component';
 
 const routes: Routes = [
   {
@@ -58,13 +59,15 @@ const routes: Routes = [
     ProductosComponent,
     ProductoConfirmarComponent,
     GastoComponent,
-    SemanaventaComponent
+    SemanaventaComponent,
+    InfoPedidoComponent
   ],
   entryComponents: [
     ProductosComponent,
     ProductoConfirmarComponent,
     GastoComponent,
-    SemanaventaComponent
+    SemanaventaComponent,
+    InfoPedidoComponent
   ]
 })
 export class HomePageModule { }

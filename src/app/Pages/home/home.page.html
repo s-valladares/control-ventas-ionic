@@ -1,81 +1,78 @@
-
 <ion-menu contentId="content">
-  <ion-header>
-      <ion-toolbar color="dark">
-          <ion-title>Menu</ion-title>
-      </ion-toolbar>
-  </ion-header>
-  <ion-content>
-      <div *ngFor="let p of pages">
-          <!-- Standard Menu Item -->
-          <ion-menu-toggle *ngIf="p.mostrar">
-              <ion-item [routerLink]="p.url" routerDirection="root" routerLinkActive="active">
-                  <ion-icon [name]="p.icon" slot="start"></ion-icon>
-                  <ion-label>
-                      {{ p.title }}
-                  </ion-label>
-              </ion-item>
-          </ion-menu-toggle>
-          <!-- Item with Children -->
-          <ion-item button *ngIf="p.children?.length > 0" (click)="p.open = !p.open" [class.parent-active]="p.open" detail="false">
-              <ion-icon slot="start" name="arrow-forward" *ngIf="!p.open"></ion-icon>
-              <ion-icon slot="start" name="arrow-down" *ngIf="p.open"></ion-icon>
-              <ion-label>{{ p.title }}</ion-label>
-          </ion-item>
-          <!-- Children List for clicked Item -->
-          <ion-list *ngIf="p.open">
-              <ion-menu-toggle>
-                  <ion-item *ngFor="let sub of p.children" class="sub-item" [routerLink]="sub.url" routerDirection="root" routerLinkActive="active">
-                      <ion-icon [name]="sub.icon" slot="start"></ion-icon>
-                      <ion-label>
-                          {{ sub.title }}
-                      </ion-label>
-                  </ion-item>
-              </ion-menu-toggle>
-          </ion-list>
-      </div>
-  </ion-content>
-  <ion-footer>
-      <ion-toolbar>
+    <ion-header>
+        <ion-toolbar color="dark">
+            <ion-title>Menu</ion-title>
+        </ion-toolbar>
+    </ion-header>
+    <ion-content>
+        <div *ngFor="let p of pages">
+            <!-- Standard Menu Item -->
+            <ion-menu-toggle *ngIf="p.mostrar">
+                <ion-item [routerLink]="p.url" routerDirection="root" routerLinkActive="active">
+                    <ion-icon [name]="p.icon" slot="start"></ion-icon>
+                    <ion-label>
+                        {{ p.title }}
+                    </ion-label>
+                </ion-item>
+            </ion-menu-toggle>
+            <!-- Item with Children -->
+            <ion-item button *ngIf="p.children?.length > 0" (click)="p.open = !p.open" [class.parent-active]="p.open"
+                detail="false">
+                <ion-icon slot="start" name="arrow-forward" *ngIf="!p.open"></ion-icon>
+                <ion-icon slot="start" name="arrow-down" *ngIf="p.open"></ion-icon>
+                <ion-label>{{ p.title }}</ion-label>
+            </ion-item>
+            <!-- Children List for clicked Item -->
+            <ion-list *ngIf="p.open">
+                <ion-menu-toggle>
+                    <ion-item *ngFor="let sub of p.children" class="sub-item" [routerLink]="sub.url"
+                        routerDirection="root" routerLinkActive="active">
+                        <ion-icon [name]="sub.icon" slot="start"></ion-icon>
+                        <ion-label>
+                            {{ sub.title }}
+                        </ion-label>
+                    </ion-item>
+                </ion-menu-toggle>
+            </ion-list>
+        </div>
+    </ion-content>
+    <ion-footer>
+        <ion-toolbar>
 
-          <div style="padding: 5px 0 5px 0;" class="ion-text-center">
-              <ion-text>
-                  © <b>Smart Devs 2020</b>
-              </ion-text>
-              <br>
-              <ion-text>
-                  Todos los derechos reservados
-              </ion-text>
-              <br>
-              <ion-text>
-                  Versión 4.0.7
-              </ion-text>
-          </div>
+            <div style="padding: 5px 0 5px 0;" class="ion-text-center">
+                <ion-text>
+                    © <b>S. Valladares, 2020</b>
+                </ion-text>
+                <br>
+                <ion-text>
+                    Versión 0.1
+                </ion-text>
+            </div>
 
-      </ion-toolbar>
-  </ion-footer>
+        </ion-toolbar>
+    </ion-footer>
 </ion-menu>
 
 <ion-router-outlet id="content" main></ion-router-outlet>
 <ion-tabs>
-  <ion-tab-bar slot="bottom">
+    <ion-tab-bar slot="bottom">
 
-    <ion-tab-button tab="pedidos">
-      <ion-icon name="alarm"  color="dark"></ion-icon>
-      <ion-label  color="dark">Pedidos</ion-label>
-      <!-->ion-badge>6</ion-badge-->
-    </ion-tab-button>
+        <ion-tab-button tab="pedidos">
+            <ion-icon name="alarm" color="dark"></ion-icon>
+            <ion-label color="dark">Pedidos</ion-label>
+            <!-->ion-badge>6</ion-badge-->
+        </ion-tab-button>
 
-    <ion-tab-button tab="productos">
-      <ion-icon name="restaurant"  color="dark"></ion-icon>
-      <ion-label  color="dark">Productos</ion-label>
-    </ion-tab-button>
+        <ion-tab-button tab="productos">
+            <ion-icon name="restaurant" color="dark"></ion-icon>
+            <ion-label color="dark">Productos</ion-label>
+        </ion-tab-button>
 
-    <ion-tab-button tab="egresos">
-      <ion-icon name="calendar"  color="dark"></ion-icon>
-      <ion-label  color="dark">Gastos</ion-label>
-      <!-->ion-badge>6</ion-badge-->
-    </ion-tab-button>
+        <ion-tab-button tab="egresos">
+            <ion-icon name="calendar" color="dark"></ion-icon>
+            <ion-label color="dark">Gastos</ion-label>
+            <!-->ion-badge>6</ion-badge-->
+        </ion-tab-button>
 
-  </ion-tab-bar>
+    </ion-tab-bar>
 </ion-tabs>

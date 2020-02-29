@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-button slot="end" fill="clear" color="light" (click)=cerarModal()>
+      <ion-icon name="close"></ion-icon>
+    </ion-button>
+    <ion-title>Detalle de la venta</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content >
+
+  <div class="ion-padding">
+    <ion-text>
+      <ion-label>Cliente: <b>{{detallePedido.pedido.cliente}}</b></ion-label><br>
+      <ion-label>Fecha y hora: <b>{{detallePedido.pedido.entrega | date: 'MMM d'}} - {{detallePedido.pedido.hora | date: 'shortTime'}}</b>
+      </ion-label><br>
+      <ion-label>Total: <b>Q{{detallePedido.total | number:'1.2-2'}}</b></ion-label> <br>
+      <ion-label>Número de productos: <b>{{mPedidoDetalles.length }}</b></ion-label>
+    </ion-text>
+  </div>
+
+  <ion-list>
+
+    <ion-item-sliding *ngFor="let item of mPedidoDetalles">
+
+      <ion-item>
+        <ion-label>
+          <h2><strong>
+            {{ item.cantidad}} {{ item.producto.nombre}}
+            </strong>
+          </h2>
+          <h3> <strong>Q{{item.total | number:'1.2-2'}}</strong> -> Q{{item.subtotal | number:'1.2-2'}} + Q{{item.adicional | number:'1.2-2'}} Adicional</h3>
+        <h4>{{item.comentario}}</h4>
+        </ion-label>
+      </ion-item>
+
+      <ion-item-options side="end">
+        <ion-item-option color="dark" (click)="alertaEliminar(item.id)">
+          <ion-icon name="trash"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+
+    </ion-item-sliding>
+
+  </ion-list>
+
+</ion-content>
