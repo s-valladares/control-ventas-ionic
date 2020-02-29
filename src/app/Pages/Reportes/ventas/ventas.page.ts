@@ -45,7 +45,7 @@ export class VentasPage implements OnInit {
     const modal = await this.modalController.create({
       component: SemanaventaComponent,
       componentProps: {
-        idPedido: id
+        idSemanaVenta: id
       }
     });
 

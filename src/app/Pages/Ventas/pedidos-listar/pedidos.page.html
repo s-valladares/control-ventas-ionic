@@ -15,6 +15,7 @@
     <ion-item-sliding *ngFor="let item of mPedidos">
 
       <ion-item (click)="verInfo(item.id)">
+        <ion-icon slot="start" name="alarm"></ion-icon>
         <ion-label>
           <h2><strong>
             {{item.cliente}} - 
