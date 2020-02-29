@@ -1,5 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { IProductos, IPedidosDetalles, PedidosDetalles, IPedidos, Pedidos } from 'src/app/Services/interfaces.index';
+import {
+  IProductos,
+  IPedidosDetalles,
+  PedidosDetalles,
+  IPedidos,
+  Pedidos } from 'src/app/Services/interfaces.index';
 import { PedidosService } from 'src/app/Services/services.index';
 import { ToastController, ModalController } from '@ionic/angular';
 

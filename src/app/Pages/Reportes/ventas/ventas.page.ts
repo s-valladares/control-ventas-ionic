@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { SemanaventaComponent } from '../../Ventas/semanaventa/semanaventa.component';
 import { ModalController } from '@ionic/angular';
-import { IVentasSemana } from 'src/app/Services/Ventas/ventas.interface';
-import { VentasService } from 'src/app/Services/Ventas/ventas.service';
+import { IVentasSemana } from 'src/app/Services/interfaces.index';
+import { VentasService } from 'src/app/Services/services.index';
 
 @Component({
   selector: 'app-ventas',

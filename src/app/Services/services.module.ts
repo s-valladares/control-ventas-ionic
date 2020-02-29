@@ -4,7 +4,9 @@ import { HttpClientModule } from '@angular/common/http';
 
 import {
   ProductosService,
-  PedidosService
+  PedidosService,
+  EgresosService,
+  VentasService
 } from './services.index';
 
 @NgModule({
@@ -15,7 +17,9 @@ import {
   ],
   providers: [
     ProductosService,
-    PedidosService
+    PedidosService,
+    EgresosService,
+    VentasService
   ]
 })
 export class ServicesModule { }

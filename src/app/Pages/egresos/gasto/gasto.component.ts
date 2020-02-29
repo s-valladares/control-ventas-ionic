@@ -1,10 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { IEgresos, Egresos } from 'src/app/Services/Egresos/egresos.interface';
+import { IEgresos, Egresos, IVentasSemana, VentasSemana  } from 'src/app/Services/interfaces.index';
 import { ModalController, ToastController } from '@ionic/angular';
-import { EgresosService } from 'src/app/Services/Egresos/egresos.service';
-import { VentasService } from 'src/app/Services/Ventas/ventas.service';
-import { IVentasSemana, VentasSemana } from 'src/app/Services/Ventas/ventas.interface';
+import { EgresosService, VentasService } from 'src/app/Services/services.index';
 
 @Component({
   selector: 'app-gasto',

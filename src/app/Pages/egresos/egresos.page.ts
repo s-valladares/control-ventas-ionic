@@ -1,8 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { GastoComponent } from './gasto/gasto.component';
 import { ModalController, ToastController, AlertController } from '@ionic/angular';
-import { EgresosService } from 'src/app/Services/Egresos/egresos.service';
-import { IEgresos } from 'src/app/Services/Egresos/egresos.interface';
+import { EgresosService } from 'src/app/Services/services.index';
+import { IEgresos } from 'src/app/Services/interfaces.index';
 
 @Component({
   selector: 'app-egresos',

@@ -1,7 +1,13 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ModalController, ToastController } from '@ionic/angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { IProductos, Productos, IProductosTipos, ProductosTipos, IPedidosDetalles } from 'src/app/Services/interfaces.index';
+import {
+  IProductos,
+  Productos,
+  IProductosTipos,
+  ProductosTipos,
+  IPedidosDetalles
+} from 'src/app/Services/interfaces.index';
 import { ProductosService } from 'src/app/Services/services.index';
 import { Config } from 'src/app/Services/Config/config';
 import { ProductoConfirmarComponent } from '../producto-confirmar/producto-confirmar.component';

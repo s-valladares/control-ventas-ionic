@@ -1,18 +1,30 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ModalController, ToastController, AlertController } from '@ionic/angular';
-import { IPedidos, Pedidos, IPedidosDetalles, PedidosDetalles } from 'src/app/Services/interfaces.index';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { PedidosService } from 'src/app/Services/services.index';
 import { ProductosComponent } from '../../Productos/productos-component/productos.component';
 import { Config } from 'src/app/Services/Config/config';
-import { IVentas, Ventas, VentasSemana, IVentasSemana } from 'src/app/Services/Ventas/ventas.interface';
-import { VentasService } from 'src/app/Services/Ventas/ventas.service';
+
+import {
+  IPedidos,
+  Pedidos,
+  IPedidosDetalles,
+  PedidosDetalles,
+  IVentas,
+  Ventas,
+  VentasSemana,
+  IVentasSemana
+} from 'src/app/Services/interfaces.index';
+import {
+  PedidosService,
+  VentasService
+} from 'src/app/Services/services.index';
 
 @Component({
   selector: 'app-pedidos',
   templateUrl: './pedidos.component.html',
   styleUrls: ['./pedidos.component.scss'],
 })
+
 export class PedidosComponent implements OnInit {
 
   @Input() idPedido: string;
