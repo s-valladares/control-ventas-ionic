@@ -21,6 +21,8 @@ export class GastoComponent implements OnInit {
   mVentaSemana: IVentasSemana;
   mGastos: IEgresos[];
   fechaHoy: Date;
+  lastDate: any = {};
+  errorTotal = false;
 
   constructor(
     private modal: ModalController,
@@ -39,6 +41,7 @@ export class GastoComponent implements OnInit {
   ngOnInit() {
     this.generarFormularioGasto();
     this.verVentasSemana();
+
   }
 
   verVentasSemana() {
@@ -53,15 +56,37 @@ export class GastoComponent implements OnInit {
     console.log('select');
   }
 
-  guardar() {
-    this.mGastoSelected = this.form.value as IEgresos;
-    console.log(this.mGastoSelected);
+  onSubmitGasto() {
 
+    this.mGastoSelected = this.form.value as IEgresos;
+    if (this.mGastoSelected.total === 0) {
+      this.errorTotal = true;
+      return;
+    }
+
+    this.getLastDate();
+
+    if (this.mGastoSelected.ventaSemana.id === '') {
+      this.mGastoSelected.ventaSemana = this.lastDate;
+    }
+
+    console.log(this.mGastoSelected);
+    this.guardar();
+  }
+
+  guardar() {
     this.service.create(this.mGastoSelected)
       .then(data => {
         this.cerarModal();
         this.presentToast('Guardado correctamente');
-      });
+      })
+      .catch(error => this.presentToast('Ocurrió un error'));
+  }
+
+  getLastDate() {
+    this.lastDate = this.mVentasSemana.reduce((r, a) => {
+      return r.fechaInicio > a.fechaInicio ? r : a;
+    });
   }
 
   generarFormularioGasto() {
@@ -70,7 +95,7 @@ export class GastoComponent implements OnInit {
       nombre: ['', [Validators.required]],
       descripcion: [''],
       fechaGasto: ['', [Validators.required]],
-      ventaSemana: [VentasSemana.empty(), [Validators.required]],
+      ventaSemana: [VentasSemana.empty()],
       total: [0, [Validators.required]]
     });
   }
