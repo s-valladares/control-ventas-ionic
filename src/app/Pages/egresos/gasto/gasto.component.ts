@@ -36,12 +36,13 @@ export class GastoComponent implements OnInit {
     this.mVentasSemana = [];
     this.idGasto = '';
     this.fechaHoy = new Date();
+    this.mVentaSemana = VentasSemana.empty();
   }
 
   ngOnInit() {
     this.generarFormularioGasto();
     this.verVentasSemana();
-
+    this.verGastoId();
   }
 
   verVentasSemana() {
@@ -53,8 +54,13 @@ export class GastoComponent implements OnInit {
       .catch(error => console.log(error));
   }
 
-  select() {
-    console.log('select');
+  verGastoId() {
+    this.service.getId(this.idGasto)
+      .then(res => {
+        this.mGastoSelected = res;
+        this.mVentaSemana = res.ventaSemana;
+      })
+      .catch(error => console.log(error));
   }
 
   onSubmitGasto() {
@@ -71,14 +77,13 @@ export class GastoComponent implements OnInit {
       this.mGastoSelected.ventaSemana = this.lastDate;
     }
 
-    console.log(this.mGastoSelected);
-   // this.guardar();
+    this.guardar();
   }
 
   guardar() {
     this.service.create(this.mGastoSelected)
       .then(data => {
-        this.cerarModal();
+        this.cerarModal(data.RES);
         this.presentToast('Guardado correctamente');
       })
       .catch(error => this.presentToast('Ocurrió un error'));
@@ -101,8 +106,8 @@ export class GastoComponent implements OnInit {
     });
   }
 
-  cerarModal() {
-    this.modal.dismiss(this.mGastoSelected);
+  cerarModal(obj) {
+    this.modal.dismiss(obj);
   }
 
   async presentToast(msg) {
