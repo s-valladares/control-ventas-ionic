@@ -76,6 +76,10 @@
         <ion-label>Entregar: <b>{{mPedido.hora  | date: 'shortTime'}} - {{mPedido.entrega  | date: 'MMM d'}}</b>
         </ion-label><br>
         <ion-label>Total a pagar: <b>Q{{totalPedido | number:'1.2-2'}}</b></ion-label>
+        <div *ngIf="errorPedido">
+          <br>
+          <ion-text  color="danger"><b>Debe agregar al menos un producto al pedido</b></ion-text>
+        </div>
       </ion-text>
     </div>
 

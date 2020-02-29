@@ -11,8 +11,6 @@
 
 <ion-content>
   <div>
-
-
       <ion-list>
 
         <ion-item>
@@ -20,6 +18,9 @@
             <ion-text color="dark">Cantidad</ion-text>
           </ion-label>
           <ion-input required type="number" [(ngModel)]="mDetallePedido.cantidad"></ion-input>
+          <div *ngIf="errorCantidad">
+            <ion-text  color="danger"><b>La cantidad no puede ser cero</b></ion-text>
+          </div>
         </ion-item>
 
         <ion-item>

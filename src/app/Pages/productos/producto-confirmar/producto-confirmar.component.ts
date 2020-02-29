@@ -23,6 +23,8 @@ export class ProductoConfirmarComponent implements OnInit {
   mDetallePedido: IPedidosDetalles;
   mPedidoDetalles: IPedidosDetalles[];
 
+  errorCantidad: boolean;
+
   constructor(
     private service: PedidosService,
     private toastController: ToastController,
@@ -32,6 +34,7 @@ export class ProductoConfirmarComponent implements OnInit {
     this.mDetallePedido = PedidosDetalles.empty();
     this.mPedido = Pedidos.empty();
     this.mPedidoDetalles = [];
+    this.errorCantidad = false;
   }
 
   ngOnInit() {
@@ -44,6 +47,11 @@ export class ProductoConfirmarComponent implements OnInit {
     this.mPedido.id = this.idPedido;
     this.mDetallePedido.pedido = this.mPedido;
     this.mDetallePedido.producto = this.producto;
+
+    if (this.mDetallePedido.cantidad === 0) {
+      this.errorCantidad = true;
+      return;
+    }
 
     this.mDetallePedido.subtotal = (this.mDetallePedido.producto.precio * this.mDetallePedido.cantidad);
     this.mDetallePedido.total = this.mDetallePedido.subtotal + this.mDetallePedido.adicional;

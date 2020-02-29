@@ -41,6 +41,8 @@ export class PedidosComponent implements OnInit {
   mVentaSemana: IVentasSemana;
   lastDate: any = {};
 
+  errorPedido: boolean;
+
   constructor(
     private modal: ModalController,
     private formBuilder: FormBuilder,
@@ -59,6 +61,8 @@ export class PedidosComponent implements OnInit {
     this.totalPedido = 0;
     this.mVentasSemana = [];
     this.mVentaSemana = VentasSemana.empty();
+
+    this.errorPedido = false;
   }
 
   ngOnInit() {
@@ -155,6 +159,11 @@ export class PedidosComponent implements OnInit {
   registrarVenta() {
     this.mVenta.total = this.totalPedido;
     this.mVenta.pedido = this.mPedido;
+
+    if (this.totalPedido === 0) {
+      this.errorPedido = true;
+      return;
+    }
 
     this.serviceVentas.create(this.mVenta)
       .then(res => {
