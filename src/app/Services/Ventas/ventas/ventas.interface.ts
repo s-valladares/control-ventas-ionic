@@ -1,4 +1,4 @@
-import { IPedidos, Pedidos } from './pedidos.interface';
+import { IPedidos, Pedidos } from '../pedidos/pedidos.interface';
 
 export interface IVentasRs {
     size: number;

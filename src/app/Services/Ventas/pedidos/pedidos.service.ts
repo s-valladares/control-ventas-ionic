@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 
-import { Config } from '../Config/config';
+import { Config } from '../../Config/config';
 import { IPedidos, IPedidosRs, IPedidosDetallesRs, IPedidosDetalles } from './pedidos.interface';
 
 @Injectable({
