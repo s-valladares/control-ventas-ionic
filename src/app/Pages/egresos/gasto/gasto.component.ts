@@ -48,6 +48,7 @@ export class GastoComponent implements OnInit {
     this.serviceVentas.getAllSemanaVenta()
       .then(res => {
         this.mVentasSemana = res.rows;
+        this.getLastDate();
       })
       .catch(error => console.log(error));
   }
@@ -71,7 +72,7 @@ export class GastoComponent implements OnInit {
     }
 
     console.log(this.mGastoSelected);
-    this.guardar();
+   // this.guardar();
   }
 
   guardar() {

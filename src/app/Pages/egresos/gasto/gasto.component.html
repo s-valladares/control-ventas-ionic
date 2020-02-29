@@ -20,7 +20,7 @@
           <ion-label position="floating"><b>Semana de venta</b></ion-label>
           <ion-select [interfaceOptions]="customActionSheetOptions" interface="action-sheet"
             formControlName="ventaSemana" placeholder="Última registrada" okText="OK" cancelText="Cancelar">
-            <ion-select-option value="última">Última registrada</ion-select-option>
+            <ion-select-option [value]="lastDate">Última registrada</ion-select-option>
             <ion-select-option *ngFor="let item of mVentasSemana" [value]="item">{{item.fechaInicio | date}}
             </ion-select-option>
           </ion-select>
