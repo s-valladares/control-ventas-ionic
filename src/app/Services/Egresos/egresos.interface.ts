@@ -1,3 +1,4 @@
+import { IVentasSemana, VentasSemana } from '../Ventas/ventas.interface';
 
 export interface IEgresosRs {
     size: number;
@@ -9,6 +10,7 @@ export interface IEgresos {
     nombre: string;
     descripcion?: string;
     fechaGasto: Date;
+    ventaSemana: IVentasSemana;
     total: number;
     createdAt?: string;
     updatedAt?: string;
@@ -21,6 +23,7 @@ export class Egresos {
             nombre: '',
             descripcion: '',
             fechaGasto: new Date(),
+            ventaSemana: VentasSemana.empty(),
             total: 0,
             createdAt: '',
             updatedAt: ''

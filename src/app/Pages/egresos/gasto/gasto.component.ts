@@ -3,6 +3,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { IEgresos, Egresos } from 'src/app/Services/Egresos/egresos.interface';
 import { ModalController, ToastController } from '@ionic/angular';
 import { EgresosService } from 'src/app/Services/Egresos/egresos.service';
+import { VentasService } from 'src/app/Services/Ventas/ventas.service';
+import { IVentasSemana, VentasSemana } from 'src/app/Services/Ventas/ventas.interface';
 
 @Component({
   selector: 'app-gasto',
@@ -15,6 +17,8 @@ export class GastoComponent implements OnInit {
 
   form: FormGroup;
   mGastoSelected: IEgresos;
+  mVentasSemana: IVentasSemana[];
+  mVentaSemana: IVentasSemana;
   mGastos: IEgresos[];
   fechaHoy: Date;
 
@@ -22,31 +26,52 @@ export class GastoComponent implements OnInit {
     private modal: ModalController,
     private formBuilder: FormBuilder,
     private service: EgresosService,
+    private serviceVentas: VentasService,
     private toastController: ToastController
   ) {
     this.mGastoSelected = Egresos.empty();
     this.mGastos = [];
+    this.mVentasSemana = [];
     this.idGasto = '';
     this.fechaHoy = new Date();
   }
 
   ngOnInit() {
+    this.generarFormularioGasto();
+    this.verVentasSemana();
+  }
 
+  verVentasSemana() {
+    this.serviceVentas.getAllSemanaVenta()
+      .then(res => {
+        this.mVentasSemana = res.rows;
+      })
+      .catch(error => console.log(error));
+  }
+
+  select() {
+    console.log('select');
+  }
+
+  guardar() {
+    this.mGastoSelected = this.form.value as IEgresos;
+    console.log(this.mGastoSelected);
+
+    this.service.create(this.mGastoSelected)
+      .then(data => {
+        this.cerarModal();
+        this.presentToast('Guardado correctamente');
+      });
+  }
+
+  generarFormularioGasto() {
     // FORMULARIO PARA CREAR UN PEDIDO
-    this.form = this.formBuilder.group({
+    return this.form = this.formBuilder.group({
       nombre: ['', [Validators.required]],
       descripcion: [''],
       fechaGasto: ['', [Validators.required]],
+      ventaSemana: [VentasSemana.empty(), [Validators.required]],
       total: [0, [Validators.required]]
-    });
-  }
-
-  guardar(){
-    this.mGastoSelected = this.form.value as IEgresos;
-    this.service.create(this.mGastoSelected)
-    .then(data => {
-      this.cerarModal();
-      this.presentToast('Guardado correctamente');
     });
   }
 

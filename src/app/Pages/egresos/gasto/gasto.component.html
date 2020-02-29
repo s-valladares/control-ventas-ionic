@@ -17,8 +17,18 @@
       <ion-list>
 
         <ion-item>
+          <ion-label position="floating"><b>Semana de venta</b></ion-label>
+          <ion-select [interfaceOptions]="customActionSheetOptions" interface="action-sheet" formControlName="ventaSemana"
+            placeholder="Última registrada" okText="OK" cancelText="Cancelar">
+            <ion-select-option value="última">Última registrada</ion-select-option>
+            <ion-select-option *ngFor="let item of mVentasSemana" [value]="item">{{item.fechaInicio | date}}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
           <ion-label position="floating">
-            <ion-text color="dark">Gasto</ion-text>
+            <ion-text color="dark"><b>Gasto</b></ion-text>
           </ion-label>
           <ion-input required type="text" formControlName="nombre"></ion-input>
         </ion-item>
@@ -26,7 +36,7 @@
 
         <ion-item>
           <ion-label position="floating">
-            <ion-text color="dark">Descripción</ion-text>
+            <ion-text color="dark"><b>Descripción</b></ion-text>
           </ion-label>
           <ion-input required type="text" formControlName="descripcion"></ion-input>
         </ion-item>
@@ -34,7 +44,7 @@
 
         <ion-item>
           <ion-label position="floating">
-            <ion-text color="dark">Fecha del gasto</ion-text>
+            <ion-text color="dark"><b>Fecha del gasto</b></ion-text>
           </ion-label>
           <ion-datetime cancel-text="Cancelar" done-text="Ok" value="" [placeholder]="fechaHoy | date"
             display-timezone="utc" formControlName="fechaGasto"></ion-datetime>
@@ -42,7 +52,7 @@
 
         <ion-item>
           <ion-label position="floating">
-            <ion-text color="dark">Total</ion-text>
+            <ion-text color="dark"><b>Total</b></ion-text>
           </ion-label>
           <ion-input required type="number" formControlName="total"></ion-input>
         </ion-item>
