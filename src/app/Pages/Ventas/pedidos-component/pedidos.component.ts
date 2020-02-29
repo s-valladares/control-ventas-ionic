@@ -5,7 +5,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { PedidosService } from 'src/app/Services/services.index';
 import { ProductosComponent } from '../../Productos/productos-component/productos.component';
 import { Config } from 'src/app/Services/Config/config';
-import { IVentas, Ventas } from 'src/app/Services/Ventas/ventas.interface';
+import { IVentas, Ventas, VentasSemana, IVentasSemana } from 'src/app/Services/Ventas/ventas.interface';
 import { VentasService } from 'src/app/Services/Ventas/ventas.service';
 
 @Component({
@@ -25,6 +25,10 @@ export class PedidosComponent implements OnInit {
   fechaHoy: Date;
   totalPedido: number;
 
+  mVentasSemana: IVentasSemana[];
+  mVentaSemana: IVentasSemana;
+  lastDate: any = {};
+
   constructor(
     private modal: ModalController,
     private formBuilder: FormBuilder,
@@ -41,22 +45,18 @@ export class PedidosComponent implements OnInit {
     this.mPedidoDetalles = [];
     this.mPedidoDetalle = PedidosDetalles.empty();
     this.totalPedido = 0;
+    this.mVentasSemana = [];
+    this.mVentaSemana = VentasSemana.empty();
   }
 
   ngOnInit() {
 
+    this.generarFormularioPedido();
+    this.verVentasSemana();
+
     if (this.idPedido !== '') {
       this.getPedidoId();
     }
-
-    // FORMULARIO PARA CREAR UN PEDIDO
-    this.form = this.formBuilder.group({
-      cliente: ['', [Validators.required]],
-      nota: [''],
-      entrega: ['', [Validators.required]],
-      hora: ['', [Validators.required]]
-    });
-
   }
 
   getPedidoId() {
@@ -68,10 +68,19 @@ export class PedidosComponent implements OnInit {
     });
   }
 
-  guardar() {
-    this.mPedido = this.form.value as IPedidos;
+  onSubmitPedido() {
 
+    this.mPedido = this.form.value as IPedidos;
     this.mPedido.estado = true;
+
+    if (this.mPedido.ventaSemana.id === '') {
+      this.mPedido.ventaSemana = this.lastDate;
+    }
+
+    this.guardar();
+  }
+
+  guardar() {
 
     this.service.create(this.mPedido)
       .then(res => {
@@ -136,13 +145,39 @@ export class PedidosComponent implements OnInit {
     this.mVenta.pedido = this.mPedido;
 
     this.serviceVentas.create(this.mVenta)
-    .then(res => {
-      alert('Venta registrada');
-      this.presentToast('Venta registrada');
-      this.cerarModal('');
-    }).catch(error => {
+      .then(res => {
+        alert('Venta registrada');
+        this.presentToast('Venta registrada');
+        this.cerarModal('');
+      }).catch(error => {
 
-      this.presentToast('Ocurrió un error');
+        this.presentToast('Ocurrió un error');
+      });
+  }
+
+  verVentasSemana() {
+    this.serviceVentas.getAllSemanaVenta()
+      .then(res => {
+        this.mVentasSemana = res.rows;
+        this.getLastDate();
+      })
+      .catch(error => console.log(error));
+  }
+
+  getLastDate() {
+    this.lastDate = this.mVentasSemana.reduce((r, a) => {
+      return r.fechaInicio > a.fechaInicio ? r : a;
+    });
+  }
+
+  generarFormularioPedido() {
+    // FORMULARIO PARA CREAR UN PEDIDO
+    return this.form = this.formBuilder.group({
+      ventaSemana: [VentasSemana.empty()],
+      cliente: ['', [Validators.required]],
+      nota: [''],
+      entrega: ['', [Validators.required]],
+      hora: ['', [Validators.required]]
     });
   }
 

@@ -1,4 +1,5 @@
 import { IProductos, Productos } from '../Productos/productos.interface';
+import { IVentasSemana, VentasSemana } from './ventas.interface';
 
 export interface IPedidosRs {
     size: number;
@@ -7,6 +8,7 @@ export interface IPedidosRs {
 
 export interface IPedidos {
     id: string;
+    ventaSemana: IVentasSemana;
     cliente: string;
     nota?: string;
     entrega: Date;
@@ -20,6 +22,7 @@ export class Pedidos {
     static empty() {
         return {
             id: '',
+            ventaSemana: VentasSemana.empty(),
             cliente: '',
             nota: '',
             entrega: new Date(),

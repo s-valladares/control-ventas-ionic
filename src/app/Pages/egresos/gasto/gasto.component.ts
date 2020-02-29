@@ -71,8 +71,6 @@ export class GastoComponent implements OnInit {
       return;
     }
 
-    this.getLastDate();
-
     if (this.mGastoSelected.ventaSemana.id === '') {
       this.mGastoSelected.ventaSemana = this.lastDate;
     }

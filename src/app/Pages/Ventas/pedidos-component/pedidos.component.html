@@ -13,13 +13,23 @@
 <ion-content>
 
   <div *ngIf="idPedido === ''">
-    <form [formGroup]="form" (ngSubmit)="guardar()">
+    <form [formGroup]="form" (ngSubmit)="onSubmitPedido()">
 
       <ion-list>
 
         <ion-item>
+          <ion-label position="floating"><b>Semana de venta</b></ion-label>
+          <ion-select [interfaceOptions]="customActionSheetOptions" interface="action-sheet"
+            formControlName="ventaSemana" placeholder="Última registrada" okText="OK" cancelText="Cancelar">
+            <ion-select-option [value]="lastDate">Última registrada</ion-select-option>
+            <ion-select-option *ngFor="let item of mVentasSemana" [value]="item">{{item.fechaInicio | date}}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
           <ion-label position="floating">
-            <ion-text color="dark">Cliente</ion-text>
+            <ion-text color="dark"><b>Cliente</b></ion-text>
           </ion-label>
           <ion-input required type="text" formControlName="cliente"></ion-input>
         </ion-item>
@@ -27,15 +37,15 @@
 
         <ion-item>
           <ion-label position="floating">
-            <ion-text color="dark">Nota</ion-text>
+            <ion-text color="dark"><b>Nota</b></ion-text>
           </ion-label>
-          <ion-input required type="text" formControlName="nota"></ion-input>
+          <ion-input type="text" formControlName="nota"></ion-input>
         </ion-item>
 
 
         <ion-item>
           <ion-label position="floating">
-            <ion-text color="dark">Fecha de entrega</ion-text>
+            <ion-text color="dark"><b>Fecha de entrega</b></ion-text>
           </ion-label>
           <ion-datetime cancel-text="Cancelar" done-text="Ok" [placeholder]="fechaHoy | date"
             display-timezone="utc" formControlName="entrega"></ion-datetime>
@@ -43,7 +53,7 @@
 
         <ion-item>
           <ion-label position="floating">
-            <ion-text color="dark">Hora de entrega</ion-text>
+            <ion-text color="dark"><b>Hora de entrega</b></ion-text>
           </ion-label>
           <ion-datetime cancel-text="Cancelar" done-text="Ok" value="" [placeholder]="fechaHoy | date: 'shortTime'"
             display-format="h:mm A" picker-format="h:mm A" formControlName="hora"></ion-datetime>
