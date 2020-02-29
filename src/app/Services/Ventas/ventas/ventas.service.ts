@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IVentas, IVentasSemana, IVentasSemanaRs } from './ventas.interface';
+import { IVentas, IVentasSemana, IVentasSemanaRs } from '../../interfaces.index';
 import { Config } from '../../Config/config';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
