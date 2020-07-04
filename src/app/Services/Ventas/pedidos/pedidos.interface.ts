@@ -1,5 +1,6 @@
+import { IVentasSemana, VentasSemana } from '../ventas_semana/ventas-semana.interface';
 import { IProductos, Productos } from '../../Productos/productos.interface';
-import { IVentasSemana, VentasSemana } from '../ventas/ventas.interface';
+
 
 export interface IPedidosRs {
     size: number;

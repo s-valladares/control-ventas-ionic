@@ -85,6 +85,12 @@ export class ProductosComponent implements OnInit {
   }
 
 
+
+  eliminar(id) {
+
+  }
+
+
   getAllProductosTipos() {
     this.service.getAllTipos().then(res => {
       this.mProductosTipos = res.rows;

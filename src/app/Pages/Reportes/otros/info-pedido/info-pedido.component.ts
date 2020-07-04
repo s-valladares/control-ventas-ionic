@@ -28,14 +28,18 @@ export class InfoPedidoComponent implements OnInit {
 
   ngOnInit() {
     this.getDetallesPedidoId();
-   }
+  }
 
-   getDetallesPedidoId() {
+  getDetallesPedidoId() {
     this.service.getAllDetallesPedidoId(this.idPedido).then(res => {
       this.mPedidoDetalles = res.rows;
     }).catch(err => {
       this.presentToast('Error al obtener pedido');
     });
+  }
+
+  alertaEliminar(id) {
+
   }
 
   cerarModal() {

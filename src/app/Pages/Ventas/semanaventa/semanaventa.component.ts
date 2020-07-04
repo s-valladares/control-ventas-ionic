@@ -85,6 +85,10 @@ export class SemanaventaComponent implements OnInit {
     this.modalPresent();
   }
 
+  eliminar(id){
+    
+  }
+
   getventaLastTime() {
     this.ventaLastTime = this.totalVentasSemana.reduce((r, a) => {
       return r.pedido.hora > a.pedido.hora ? r : a;

@@ -1,4 +1,5 @@
-import { IVentasSemana, VentasSemana } from '../Ventas/ventas/ventas.interface';
+import { IVentasSemana, VentasSemana } from '../Ventas/ventas_semana/ventas-semana.interface';
+
 
 export interface IEgresosRs {
     size: number;

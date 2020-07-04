@@ -1,6 +1,6 @@
 export class Config {
 
-    public static url = 'http://localhost:5000/ventas/api/';
+    public static url = 'https://ventas-back-spring.herokuapp.com/ventas/api/';
 
     public static ELEGIR = 'ELEGIR';
     public static CREAR = 'CREAR';
